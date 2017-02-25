@@ -1,0 +1,10 @@
+/_build
+/cover
+/deps
+erl_crash.dump
+*.ez
+/rel
+**/rel
+.idea
+*.iml
+*.lock
