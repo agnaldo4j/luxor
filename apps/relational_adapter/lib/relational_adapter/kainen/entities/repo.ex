@@ -5,9 +5,9 @@ defmodule RelationalAdapter.Kaizen.Repo do
     schema "repos" do
         field :created, Timex.Ecto.DateTime
         field :updated, Timex.Ecto.DateTime
-        field :repository_id, string
-        field :name, string
-        field :full_name, string
+        field :repository_id, :string
+        field :name, :string
+        field :full_name, :string
         many_to_many :teams, RelationalAdapter.Kaizen.Team, join_through: "repos_teams"
         many_to_many :issues, RelationalAdapter.Kaizen.Issue, join_through: "repos_issues"
         many_to_many :projects, RelationalAdapter.Kaizen.Project, join_through: "repos_projects"

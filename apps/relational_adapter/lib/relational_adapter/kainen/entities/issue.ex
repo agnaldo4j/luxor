@@ -9,7 +9,7 @@ defmodule RelationalAdapter.Kaizen.Issue do
         field :issue_id, :string
         field :number, :integer
         field :title, :string
-        field :text, :text
+        field :text, :string
         field :state, :string
         many_to_many :assignees, RelationalAdapter.Kaizen.User, join_through: "issues_assignees"
     end

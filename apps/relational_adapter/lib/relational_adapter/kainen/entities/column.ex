@@ -7,7 +7,7 @@ defmodule RelationalAdapter.Kaizen.Column do
         field :updated, Timex.Ecto.DateTime
         field :column_id, :string
         field :name, :string
-        field :text, :text
+        field :text, :string
         many_to_many :cards, RelationalAdapter.Kaizen.Column, join_through: "columns_cards"
     end
 

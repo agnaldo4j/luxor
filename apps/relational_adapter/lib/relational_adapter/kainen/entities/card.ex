@@ -1,4 +1,4 @@
-defmodule RelationalAdapter.Kaizen.Cards do
+defmodule RelationalAdapter.Kaizen.Card do
     use RelationalAdapter.Model
     use Timex
 
@@ -10,16 +10,16 @@ defmodule RelationalAdapter.Kaizen.Cards do
         many_to_many :issues, RelationalAdapter.Kaizen.Issue, join_through: "cards_issues"
     end
 
-    def from_business(repo = %Kaizen.Cards{}) do
-        %RelationalAdapter.Kaizen.Cards{
+    def from_business(repo = %Kaizen.Card{}) do
+        %RelationalAdapter.Kaizen.Card{
             id: repo.id,
             created: repo.created,
             updated: repo.updated
         }
     end
 
-    def to_business(repo = %RelationalAdapter.Kaizen.Cards{}) do
-        %Kaizen.Cards{
+    def to_business(repo = %RelationalAdapter.Kaizen.Card{}) do
+        %Kaizen.Card{
             id: repo.id,
             created: repo.created,
             updated: repo.updated

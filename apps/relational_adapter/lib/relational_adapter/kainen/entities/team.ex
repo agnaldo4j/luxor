@@ -5,7 +5,7 @@ defmodule RelationalAdapter.Kaizen.Team do
     schema "teams" do
         field :created, Timex.Ecto.DateTime
         field :updated, Timex.Ecto.DateTime
-        field :name, string
+        field :name, :string
         many_to_many :users, RelationalAdapter.Kaizen.User, join_through: "teams_users"
     end
 
