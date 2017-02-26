@@ -1,7 +1,7 @@
 defmodule RetrospectiveTest do
   use ExUnit.Case
   use Timex
-  doctest Kaizen.User
+  doctest Luxor.User
 
   test "create empty user" do
     assert 1 == 1
