@@ -1,4 +1,4 @@
-defmodule Kaizen.User do
+defmodule Luxor.User do
     @derive [Poison.Encoder]
     use Timex
 
@@ -6,25 +6,21 @@ defmodule Kaizen.User do
         :id,
         :created,
         :updated,
-        :user_id,
         :name,
         :email,
-        :password,
-        :github_token
+        :password
     ]
 
-    @type t :: %Kaizen.User {
+    @type t :: %Luxor.User {
         id: String.t,
         created: Timex.DateTime,
         updated: Timex.DateTime,
-        user_id: Integer.t,
         name: String.t,
         email: String.t,
-        password: String.t,
-        github_token: String.t
+        password: String.t
     }
 
-    def identify(user = %Kaizen.User{}) do
+    def identify(user = %Luxor.User{}) do
         %{user | id: UUID.uuid4(), created: DateTime.today, updated: DateTime.today}
     end
 end

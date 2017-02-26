@@ -1,8 +1,8 @@
-defmodule Usecase.Kaizen.AddUserUsecase do
+defmodule Usecase.Luxor.AddUserUsecase do
     use GenServer
 
     def start_link(state, opts \\ []) do
-        GenServer.start_link(Usecase.Kaizen.AddUserUsecase, state, opts)
+        GenServer.start_link(Usecase.Luxor.AddUserUsecase, state, opts)
     end
 
     def handle_call({:add_new_user, command = %Command.User.AddNewUserCommand{}}, _from, actual_state) do
@@ -11,8 +11,8 @@ defmodule Usecase.Kaizen.AddUserUsecase do
     end
 
     defp add_new_user(command = %Command.User.AddNewUserCommand{}) do
-        %Command.Github.GetUserInfoCommand{token: command.github_token} |>
-        Github.Kaizen.GithubAdapterApi.get_user_info
-        # |> Persistence.Kaizen.UserPersistenceAdapterApi.save
+
+
+        # |> Persistence.Luxor.UserPersistenceAdapterApi.save
     end
 end

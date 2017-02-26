@@ -1,4 +1,4 @@
-defmodule RelationalAdapter.Model do
+defmodule RelationalAdapter.Luxor.Model do
     defmacro __using__(_) do
         quote do
             use Ecto.Schema
