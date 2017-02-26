@@ -30,7 +30,7 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 config :relational_adapter, RelationalAdapter.Kaizen.Repository,
   adapter: Ecto.Adapters.Postgres,
-  database: "kaizen",
+  database: "luxor",
   username: "postgres",
   password: "01aa01",
   hostname: "localhost"
