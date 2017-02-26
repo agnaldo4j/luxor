@@ -1,14 +1,14 @@
-defmodule Persistence.Kaizen.UserPersistenceAdapterApi do
+defmodule Persistence.Luxor.UserPersistenceAdapterApi do
     def get_all_users do
-        GenServer.call(:db_server, :get_all_users)
+        GenServer.call(:user_persistence_adapter, :get_all_users)
     end
 
-    def save(userModel = %Kaizen.User{}) do
-        GenServer.call(:db_server, {:save_user, userModel})
+    def save(user = %Luxor.User{}) do
+        GenServer.call(:user_persistence_adapter, {:save_user, user})
     end
 
     def find_by_id(id) do
-        GenServer.call(:db_server, {:find_user_by_id, id})
+        GenServer.call(:user_persistence_adapter, {:find_user_by_id, id})
     end
 
 end
