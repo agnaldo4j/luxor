@@ -1,10 +1,13 @@
 defmodule Command.User.AddNewUserCommand do
     defstruct [
-        :github_token
+        :name,
+        :email,
+        :password
     ]
 
     @type t :: %Command.User.AddNewUserCommand {
-        github_token: String.t
+        name: String.t,
+        email: String.t,
+        password: String.t
     }
-  
 end

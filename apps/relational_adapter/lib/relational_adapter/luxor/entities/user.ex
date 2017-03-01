@@ -14,7 +14,10 @@ defmodule RelationalAdapter.Luxor.User do
         %RelationalAdapter.Luxor.User{
             id: user.id,
             created: user.created,
-            updated: user.updated
+            updated: user.updated,
+            name: user.name,
+            email: user.email,
+            password: user.password
         }
     end
 
@@ -22,7 +25,10 @@ defmodule RelationalAdapter.Luxor.User do
         %Luxor.User{
             id: user.id,
             created: user.created,
-            updated: user.updated
+            updated: user.updated,
+            name: user.name,
+            email: user.email,
+            password: user.password
         }
     end
 end

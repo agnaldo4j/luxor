@@ -29,11 +29,14 @@ defmodule RelationalAdapter.Luxor.UserPersistenceAdapter do
     end
 
     defp list_to_domain() do
-        fn(resultAdopt) ->
+        fn(user) ->
             %Luxor.User{
-                id: resultAdopt.id,
-                created: resultAdopt.created,
-                updated: resultAdopt.updated
+                id: user.id,
+                created: user.created,
+                updated: user.updated,
+                name: user.name,
+                email: user.email,
+                password: user.password
             }
         end
     end
