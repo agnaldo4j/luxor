@@ -29,12 +29,6 @@ defmodule RelationalAdapter.Luxor.DevicePersistenceAdapter do
     end
 
     defp list_to_domain() do
-        fn(resultAdopt) ->
-            %Luxor.Device{
-                id: resultAdopt.id,
-                created: resultAdopt.created,
-                updated: resultAdopt.updated
-            }
-        end
+        fn(device) -> RelationalAdapter.Luxor.Device.to_business(device) end
     end
 end

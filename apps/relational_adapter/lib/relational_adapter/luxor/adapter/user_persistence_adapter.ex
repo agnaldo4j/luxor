@@ -29,15 +29,6 @@ defmodule RelationalAdapter.Luxor.UserPersistenceAdapter do
     end
 
     defp list_to_domain() do
-        fn(user) ->
-            %Luxor.User{
-                id: user.id,
-                created: user.created,
-                updated: user.updated,
-                name: user.name,
-                email: user.email,
-                password: user.password
-            }
-        end
+        fn(user) -> RelationalAdapter.Luxor.User.to_business(user) end
     end
 end
