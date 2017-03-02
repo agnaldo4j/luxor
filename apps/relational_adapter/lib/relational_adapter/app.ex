@@ -6,7 +6,8 @@ defmodule RelationalAdapter.App do
         tree = [
             worker(RelationalAdapter.Luxor.Repository, []),
             worker(RelationalAdapter.Luxor.DevicePersistenceAdapter, [[], [name: :device_persistence_adapter]]),
-            worker(RelationalAdapter.Luxor.UserPersistenceAdapter, [[], [name: :user_persistence_adapter]])
+            worker(RelationalAdapter.Luxor.UserPersistenceAdapter, [[], [name: :user_persistence_adapter]]),
+            worker(RelationalAdapter.Luxor.ClientPersistenceAdapter, [[], [name: :client_persistence_adapter]])
         ]
         opts = [name: RelationalAdapter.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)

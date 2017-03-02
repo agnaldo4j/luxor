@@ -1,13 +1,13 @@
 defmodule Command.User.AddNewUserCommand do
     defstruct [
-        :name,
         :email,
-        :password
+        :password,
+        :active
     ]
 
     @type t :: %Command.User.AddNewUserCommand {
-        name: String.t,
         email: String.t,
-        password: String.t
+        password: String.t,
+        active: Boolean.t
     }
 end

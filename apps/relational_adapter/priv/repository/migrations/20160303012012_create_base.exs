@@ -14,14 +14,22 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
             add :id, :string, primary_key: true
             add :created, :datetime, default: fragment("now()")
             add :updated, :datetime
-            add :name, :string
             add :email, :string
             add :password, :string
+            add :active, :boolean
+        end
+
+        create table(:clients, primary_key: false) do
+            add :id, :string, primary_key: true
+            add :created, :datetime, default: fragment("now()")
+            add :updated, :datetime
+            add :name, :string
         end
     end
 
     def down do
         drop table(:devices)
         drop table(:users)
+        drop table(:clients)
     end
 end

@@ -6,18 +6,18 @@ defmodule Luxor.User do
         :id,
         :created,
         :updated,
-        :name,
         :email,
-        :password
+        :password,
+        :active
     ]
 
     @type t :: %Luxor.User {
         id: String.t,
         created: Timex.DateTime,
         updated: Timex.DateTime,
-        name: String.t,
         email: String.t,
-        password: String.t
+        password: String.t,
+        active: Boolean.t
     }
 
     def identify(user = %Luxor.User{}) do

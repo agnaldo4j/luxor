@@ -11,7 +11,7 @@ defmodule Usecase.Luxor.AddUserUsecase do
     end
 
     defp add_new_user(command = %Command.User.AddNewUserCommand{}) do
-        %Luxor.User{name: command.name, email: command.email, password: command.password} |>
+        %Luxor.User{email: command.email, password: command.password, active: command.active} |>
         Luxor.User.identify |>
         Persistence.Luxor.UserPersistenceAdapterApi.save
     end

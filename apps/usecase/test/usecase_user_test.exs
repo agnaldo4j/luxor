@@ -3,8 +3,8 @@ defmodule Usecase.UserTest do
   doctest Usecase.Luxor.AddUserUsecase
 
     test "add new user by persistence adapter" do
-        command = %Command.User.AddNewUserCommand{name: "teste", email: "agnaldo4j@gmail.com", password: "password"}
-        result = Usecase.Luxor.AddUserUsecaseApi.add_new_user(command)
+        command = %Command.User.AddNewUserCommand{email: "agnaldo4j@gmail.com", password: "password", active: true}
+        result = Usecase.Luxor.UserUsecaseApi.add_new_user(command)
         assert result.email == "agnaldo4j@gmail.com"
     end
 end

@@ -8,7 +8,7 @@ defmodule RelationalAdapter.Luxor.DevicePersistenceAdapter do
 
     def handle_call(:get_all_devices, _from, actual_state) do
         result = RelationalAdapter.Luxor.DeviceRepository.keyword_query()
-        external_list = Enum.map(result, list_to_domain)
+        external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}
     end
 
