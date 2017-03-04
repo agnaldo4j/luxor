@@ -8,21 +8,21 @@ defmodule RelationalAdapter.Luxor.Client do
         field :name, :string
     end
 
-    def from_business(device = %Luxor.Client{}) do
+    def from_business(client = %Luxor.Client{}) do
         %RelationalAdapter.Luxor.Client{
-            id: device.id,
-            created: device.created,
-            updated: device.updated,
-            name: device.name
+            id: client.id,
+            created: client.created,
+            updated: client.updated,
+            name: client.name
         }
     end
 
-    def to_business(device = %RelationalAdapter.Luxor.Client{}) do
+    def to_business(client = %RelationalAdapter.Luxor.Client{}) do
         %Luxor.Client{
-            id: device.id,
-            created: device.created,
-            updated: device.updated,
-            name: device.name
+            id: client.id,
+            created: client.created,
+            updated: client.updated,
+            name: client.name
         }
     end
 end
