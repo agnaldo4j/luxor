@@ -16,8 +16,7 @@ defmodule RelationalAdapter.Luxor.Client do
     end
 
     def from_business(domain = %Luxor.Client{}) do
-        params = %{id: domain.id, created: domain.created, updated: domain.updated, name: domain.name}
-        changeset(%RelationalAdapter.Luxor.Client{}, params)
+        changeset(%RelationalAdapter.Luxor.Client{}, build_params(domain))
     end
 
     def to_business(client = %RelationalAdapter.Luxor.Client{}) do
@@ -26,6 +25,15 @@ defmodule RelationalAdapter.Luxor.Client do
             created: client.created,
             updated: client.updated,
             name: client.name
+        }
+    end
+
+    defp build_params(domain) do
+        %{
+            id: domain.id,
+            created: domain.created,
+            updated: domain.updated,
+            name: domain.name
         }
     end
 end

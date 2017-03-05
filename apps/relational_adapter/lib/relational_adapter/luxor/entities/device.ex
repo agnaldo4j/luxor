@@ -17,8 +17,7 @@ defmodule RelationalAdapter.Luxor.Device do
     end
 
     def from_business(domain = %Luxor.Device{}) do
-        params = %{id: domain.id, created: domain.created, updated: domain.updated, serial_number: domain.serial_number, name: domain.name}
-        changeset(%RelationalAdapter.Luxor.Device{}, params)
+        changeset(%RelationalAdapter.Luxor.Device{}, build_params(domain))
     end
 
     def to_business(device = %RelationalAdapter.Luxor.Device{}) do
@@ -28,6 +27,16 @@ defmodule RelationalAdapter.Luxor.Device do
             updated: device.updated,
             serial_number: device.serial_number,
             name: device.name
+        }
+    end
+
+    defp build_params(domain) do
+        %{
+            id: domain.id,
+            created: domain.created,
+            updated: domain.updated,
+            serial_number: domain.serial_number,
+            name: domain.name
         }
     end
 end
