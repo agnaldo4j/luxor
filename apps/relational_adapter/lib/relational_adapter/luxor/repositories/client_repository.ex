@@ -1,8 +1,8 @@
 defmodule RelationalAdapter.Luxor.ClientRepository do
     import Ecto.Query
 
-    def save(client = %RelationalAdapter.Luxor.Client{}) do
-        RelationalAdapter.Luxor.Repository.insert!(client)
+    def save(changeset) do
+        RelationalAdapter.Luxor.Repository.insert!(changeset)
     end
 
     def keyword_query do

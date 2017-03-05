@@ -1,6 +1,7 @@
 defmodule RelationalAdapter.Luxor.Client do
     use RelationalAdapter.Luxor.Model
     use Timex
+    import Ecto.Changeset
 
     schema "clients" do
         field :created, Timex.Ecto.DateTime
@@ -8,13 +9,15 @@ defmodule RelationalAdapter.Luxor.Client do
         field :name, :string
     end
 
-    def from_business(client = %Luxor.Client{}) do
-        %RelationalAdapter.Luxor.Client{
-            id: client.id,
-            created: client.created,
-            updated: client.updated,
-            name: client.name
-        }
+    def changeset(client, params \\ %{}) do
+        client
+        |> cast(params, [:id, :created, :updated, :name])
+        |> validate_required([:id, :created, :updated, :name])
+    end
+
+    def from_business(domain = %Luxor.Client{}) do
+        params = %{id: domain.id, created: domain.created, updated: domain.updated, name: domain.name}
+        changeset(%RelationalAdapter.Luxor.Client{}, params)
     end
 
     def to_business(client = %RelationalAdapter.Luxor.Client{}) do

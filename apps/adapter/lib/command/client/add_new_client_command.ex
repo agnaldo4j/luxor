@@ -1,11 +1,13 @@
 defmodule Command.Client.AddNewClientCommand do
     defstruct [
-        :serial_number,
-        :name
+        :name,
+        :email,
+        :password
     ]
 
     @type t :: %Command.Client.AddNewClientCommand {
-        serial_number: String.t,
-        name: String.t
+        name: String.t,
+        email: String.t,
+        password: String.t
     }
 end
