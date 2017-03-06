@@ -63,5 +63,8 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
         drop table(:users)
         drop table(:clients)
         drop table(:client_users)
+        drop table(:technical_teams)
+        drop table(:technicians)
+        drop table(:technical_team_technicians)
     end
 end
