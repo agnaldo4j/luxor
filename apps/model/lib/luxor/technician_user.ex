@@ -1,4 +1,4 @@
-defmodule Luxor.ClientUser do
+defmodule Luxor.TechnicianUser do
     @derive [Poison.Encoder]
     use Timex
 
@@ -6,19 +6,19 @@ defmodule Luxor.ClientUser do
         :id,
         :created,
         :updated,
-        :client,
+        :technician,
         :user
     ]
 
-    @type t :: %Luxor.ClientUser {
+    @type t :: %Luxor.TechnicianUser {
         id: String.t,
         created: Timex.DateTime,
         updated: Timex.DateTime,
-        client: Luxor.Client.t,
-        user: Luxor.User.t
+        technician: Luxor.Technician.t,
+        user: Luxir.User.t
     }
 
-    def identify(repo = %Luxor.ClientUser{}) do
+    def identify(repo = %Luxor.TechnicianUser{}) do
         %{repo | id: UUID.uuid4(), created: DateTime.today, updated: DateTime.today}
     end
 end
