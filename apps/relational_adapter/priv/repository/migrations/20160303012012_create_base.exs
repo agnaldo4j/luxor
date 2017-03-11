@@ -81,6 +81,15 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
             add :cpf, :string
             add :phone, :string
         end
+
+        create table(:animals, primary_key: false) do
+            add :id, :string, primary_key: true
+            add :created, :datetime, default: fragment("now()")
+            add :updated, :datetime
+            add :register_number, :string
+            add :breed, :string
+            add :producer_id, references(:producers, column: :id, type: :string)
+        end
     end
 
     def down do
@@ -93,5 +102,6 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
         drop table(:technical_team_technicians)
         drop table(:transporters)
         drop table(:producers)
+        drop table(:animals)
     end
 end
