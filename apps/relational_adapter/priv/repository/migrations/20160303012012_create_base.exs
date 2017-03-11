@@ -90,6 +90,13 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
             add :breed, :string
             add :producer_id, references(:producers, column: :id, type: :string)
         end
+
+        create table(:analyzes, primary_key: false) do
+            add :id, :string, primary_key: true
+            add :created, :datetime, default: fragment("now()")
+            add :updated, :datetime
+            add :name, :string
+        end
     end
 
     def down do
@@ -103,5 +110,6 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
         drop table(:transporters)
         drop table(:producers)
         drop table(:animals)
+        drop table(:analyzes)
     end
 end
