@@ -71,6 +71,16 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
             add :updated, :datetime
             add :name, :string
         end
+
+        create table(:producers, primary_key: false) do
+            add :id, :string, primary_key: true
+            add :created, :datetime, default: fragment("now()")
+            add :updated, :datetime
+            add :name, :string
+            add :sex, :string
+            add :cpf, :string
+            add :phone, :string
+        end
     end
 
     def down do
@@ -81,5 +91,7 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
         drop table(:technical_teams)
         drop table(:technicians)
         drop table(:technical_team_technicians)
+        drop table(:transporters)
+        drop table(:producers)
     end
 end
