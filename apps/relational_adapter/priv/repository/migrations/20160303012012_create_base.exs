@@ -64,6 +64,13 @@ defmodule RelationalAdapter.Luxor.Migrations.CreateBase do
             add :technician_id, references(:technicians, column: :id, type: :string)
             add :user_id, references(:users, column: :id, type: :string)
         end
+
+        create table(:transporters, primary_key: false) do
+            add :id, :string, primary_key: true
+            add :created, :datetime, default: fragment("now()")
+            add :updated, :datetime
+            add :name, :string
+        end
     end
 
     def down do
