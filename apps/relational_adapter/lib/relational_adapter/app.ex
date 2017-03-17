@@ -12,7 +12,9 @@ defmodule RelationalAdapter.App do
             worker(RelationalAdapter.Luxor.TransporterPersistenceAdapter, [[], [name: :transporter_persistence_adapter]]),
             worker(RelationalAdapter.Luxor.ProducerPersistenceAdapter, [[], [name: :producer_persistence_adapter]]),
             worker(RelationalAdapter.Luxor.AnimalPersistenceAdapter, [[], [name: :animal_persistence_adapter]]),
-            worker(RelationalAdapter.Luxor.AnalysisPersistenceAdapter, [[], [name: :analysis_persistence_adapter]])
+            worker(RelationalAdapter.Luxor.AnalysisPersistenceAdapter, [[], [name: :analysis_persistence_adapter]]),
+            worker(RelationalAdapter.Luxor.TruckPersistenceAdapter, [[], [name: :truck_persistence_adapter]]),
+            worker(RelationalAdapter.Luxor.TruckDriverPersistenceAdapter, [[], [name: :truck_driver_persistence_adapter]])
         ]
         opts = [name: RelationalAdapter.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)
