@@ -1,20 +1,11 @@
 # Adapter
 
-**TODO: Add description**
+**Objetos sao usados como forma de iterfaciamento entre as camadas do sistema**
 
-## Installation
+Seu principal objetivo e isolar cada camada evitando forte acoplamento entre as camadas.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+[Commands](https://github.com/agnaldo4j/luxor/tree/develop/apps/adapter/lib/command)
 
-  1. Add adapter to your list of dependencies in `mix.exs`:
+[Persistence](https://github.com/agnaldo4j/luxor/tree/develop/apps/adapter/lib/persistence)
 
-        def deps do
-          [{:adapter, "~> 0.0.1"}]
-        end
-
-  2. Ensure adapter is started before your application:
-
-        def application do
-          [applications: [:adapter]]
-        end
-
+[Usecase](https://github.com/agnaldo4j/luxor/tree/develop/apps/adapter/lib/usecase)
