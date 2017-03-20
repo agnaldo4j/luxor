@@ -1,16 +1,16 @@
-defmodule Usecase.Luxor.SaveClientUsecase do
+defmodule Usecase.Luxor.SaveClientUserUsecase do
     use GenServer
 
     def start_link(state, opts \\ []) do
-        GenServer.start_link(Usecase.Luxor.SaveClientUsecase, state, opts)
+        GenServer.start_link(Usecase.Luxor.SaveClientUserUsecase, state, opts)
     end
 
-    def handle_call({:save, command = %Command.Client.SaveClientCommand{}}, _from, actual_state) do
+    def handle_call({:save, command = %Command.ClientUser.SaveClientUserCommand{}}, _from, actual_state) do
         result = execute(command)
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Client.SaveClientCommand{}) do
+    defp execute(command = %Command.ClientUser.SaveClientUserCommand{}) do
         client = build_client_with(command)
         user = build_user_with(command)
 
