@@ -6,7 +6,7 @@ defmodule RelationalAdapter.Luxor.ProducerPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.ProducerPersistenceAdapter, state, opts)
     end
 
-    def handle_call(:list, _from, actual_state) do
+    def handle_call({:list}, _from, actual_state) do
         result = RelationalAdapter.Luxor.ProducerRepository.get_all()
         external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}

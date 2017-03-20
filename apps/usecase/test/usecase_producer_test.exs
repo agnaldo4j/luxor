@@ -74,6 +74,6 @@ defmodule Usecase.ProducerTest do
         result = Usecase.Luxor.ProducerUsecaseApi.list(
             %Command.Producer.ListProducerCommand{}
         )
-        assert result.name == "teste"
+        assert Enum.empty?(result) == false
     end
 end
