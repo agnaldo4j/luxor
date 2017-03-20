@@ -1,6 +1,9 @@
 defmodule Usecase.ProducerTest do
   use ExUnit.Case, async: true
   doctest Usecase.Luxor.SaveProducerUsecase
+  doctest Usecase.Luxor.UpdateProducerUsecase
+  doctest Usecase.Luxor.DeleteProducerUsecase
+  doctest Usecase.Luxor.ListProducerUsecase
 
     @tag :wip
     test "add new producer by persistence adapter" do
