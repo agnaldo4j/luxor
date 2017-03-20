@@ -30,7 +30,7 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 config :relational_adapter, RelationalAdapter.Luxor.Repository,
   adapter: Ecto.Adapters.Postgres,
-  database: "luxor",
-  username: "postgres",
-  password: "01aa01",
-  hostname: "localhost"
+  database: "luxor_dev",
+  username: "luxor",
+  password: "luxor2n6g0o2n",
+  hostname: "luxor-dev.cqwyyfi1pky6.us-east-1.rds.amazonaws.com"
