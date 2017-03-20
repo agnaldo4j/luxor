@@ -13,8 +13,8 @@ defmodule RelationalAdapter.Luxor.ProducerRepository do
       RelationalAdapter.Luxor.Repository.delete!(changeset)
     end
 
-    def get(producer_id) do
-      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.Producer, producer_id)
+    def get(id) do
+      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.Producer, id)
     end
 
     def get_all do

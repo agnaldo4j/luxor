@@ -6,17 +6,17 @@ defmodule RelationalAdapter.Luxor.ClientPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.ClientPersistenceAdapter, state, opts)
     end
 
-    def handle_call(:get_all_clients, _from, actual_state) do
-        result = RelationalAdapter.Luxor.ClientRepository.keyword_query()
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.ClientRepository.get_all()
         external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}
     end
 
-    def handle_call({:find_client_by_id, client_id}, _from, actual_state) do
-        {:reply, %Luxor.Client{id: client_id}, actual_state}
+    def handle_call({:get, client}, _from, actual_state) do
+        {:reply, %Luxor.Client{id: client}, actual_state}
     end
 
-    def handle_call({:save_client, client}, _from, actual_state) do
+    def handle_call({:save, client}, _from, actual_state) do
         client |>
         RelationalAdapter.Luxor.Client.from_business |>
         RelationalAdapter.Luxor.ClientRepository.save |>

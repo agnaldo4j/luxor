@@ -5,7 +5,7 @@ defmodule RelationalAdapter.Luxor.ClientUserRepository do
         RelationalAdapter.Luxor.Repository.insert!(changeset)
     end
 
-    def keyword_query do
+    def get_all do
         query = from w in RelationalAdapter.Luxor.ClientUser, select: w
         RelationalAdapter.Luxor.Repository.all(query)
     end

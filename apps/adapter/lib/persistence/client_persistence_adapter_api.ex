@@ -1,14 +1,14 @@
 defmodule Persistence.Luxor.ClientPersistenceAdapterApi do
-    def get_all_devices do
-        GenServer.call(:client_persistence_adapter, :get_all_clients)
+    def list do
+        GenServer.call(:client_persistence_adapter, :list)
     end
 
     def save(client = %Luxor.Client{}) do
-        GenServer.call(:client_persistence_adapter, {:save_client, client})
+        GenServer.call(:client_persistence_adapter, {:save, client})
     end
 
-    def find_by_id(id) do
-        GenServer.call(:client_persistence_adapter, {:find_client_by_id, id})
+    def get(client = %Luxor.Client{}) do
+        GenServer.call(:client_persistence_adapter, {:get, client})
     end
 
 end

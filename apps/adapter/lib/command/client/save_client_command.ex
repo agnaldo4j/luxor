@@ -1,11 +1,11 @@
-defmodule Command.Client.AddNewClientCommand do
+defmodule Command.Client.SaveClientCommand do
     defstruct [
         :name,
         :email,
         :password
     ]
 
-    @type t :: %Command.Client.AddNewClientCommand {
+    @type t :: %Command.Client.SaveClientCommand {
         name: String.t,
         email: String.t,
         password: String.t
