@@ -22,6 +22,10 @@ defmodule RelationalAdapter.Luxor.ClientUser do
         changeset(%RelationalAdapter.Luxor.ClientUser{}, build_params(domain))
     end
 
+   def change_state_to(actual_state = %RelationalAdapter.Luxor.ClientUser{}, domain = %Luxor.ClientUser{}) do
+      #changeset(actual_state, update_build_params(actual_state, domain))
+    end
+
     def to_business(client_user = %RelationalAdapter.Luxor.ClientUser{}) do
         %Luxor.ClientUser{
             id: client_user.id,

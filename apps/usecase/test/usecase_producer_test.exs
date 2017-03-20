@@ -6,6 +6,7 @@ defmodule Usecase.ProducerTest do
   doctest Usecase.Luxor.ListProducerUsecase
   doctest Usecase.Luxor.GetProducerUsecase
 
+    @tag :ProducerTest
     test "add new producer by persistence adapter" do
         result = Usecase.Luxor.ProducerUsecaseApi.save(
             %Command.Producer.SaveProducerCommand{
@@ -18,6 +19,7 @@ defmodule Usecase.ProducerTest do
         assert result.name == "teste"
     end
 
+    @tag :ProducerTest
     test "update producer by persistence adapter" do
         saved_producer = Usecase.Luxor.ProducerUsecaseApi.save(
             %Command.Producer.SaveProducerCommand{
@@ -43,6 +45,7 @@ defmodule Usecase.ProducerTest do
         assert result.phone == "4799715556"
     end
 
+    @tag :ProducerTest
     test "remove producer by persistence adapter" do
         saved_producer = Usecase.Luxor.ProducerUsecaseApi.save(
             %Command.Producer.SaveProducerCommand{
@@ -61,6 +64,7 @@ defmodule Usecase.ProducerTest do
         assert result.name == "teste"
     end
 
+    @tag :ProducerTest
     test "list producer by persistence adapter" do
         Usecase.Luxor.ProducerUsecaseApi.save(
             %Command.Producer.SaveProducerCommand{
@@ -77,6 +81,7 @@ defmodule Usecase.ProducerTest do
         assert Enum.empty?(result) == false
     end
 
+    @tag :ProducerTest
     test "get producer by persistence adapter" do
         saved_producer = Usecase.Luxor.ProducerUsecaseApi.save(
             %Command.Producer.SaveProducerCommand{

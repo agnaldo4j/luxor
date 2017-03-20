@@ -18,18 +18,12 @@ defmodule RelationalAdapter.Luxor.Producer do
         |> validate_required([:id, :created, :updated, :name, :sex, :cpf, :phone])
     end
 
-    def update_changeset(producer, params \\ %{}) do
-        producer
-        |> cast(params, [:id, :updated, :name, :sex, :cpf, :phone])
-        |> validate_required([:id, :updated, :name, :sex, :cpf, :phone])
-    end
-
     def from_business(domain = %Luxor.Producer{}) do
         changeset(%RelationalAdapter.Luxor.Producer{}, build_params(domain))
     end
 
     def change_state_to(actual_state = %RelationalAdapter.Luxor.Producer{}, domain = %Luxor.Producer{}) do
-      update_changeset(actual_state, update_build_params(domain))
+      changeset(actual_state, update_build_params(actual_state, domain))
     end
 
     def to_business(producer = %RelationalAdapter.Luxor.Producer{}) do
@@ -56,9 +50,10 @@ defmodule RelationalAdapter.Luxor.Producer do
         }
     end
 
-    defp update_build_params(domain) do
+    defp update_build_params(actual_state, domain) do
         %{
-            id: domain.id,
+            id: actual_state.id,
+            created: actual_state.created,
             updated: DateTime.today,
             name: domain.name,
             sex: domain.sex,

@@ -21,6 +21,21 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
         result_transaction(actual_state)
     end
 
+    def handle_call({:delete, client_user}, _from, actual_state) do
+        execute_update_transaction(client_user) |>
+        result_transaction(actual_state)
+    end
+
+    defp execute_update_transaction(client_user) do
+        RelationalAdapter.Luxor.Repository.transaction fn ->
+            client_user.id |>
+            RelationalAdapter.Luxor.ClientUserRepository.get |>
+            RelationalAdapter.Luxor.ClientUser.change_state_to(client_user) |>
+            RelationalAdapter.Luxor.ClientUserRepository.update |>
+            RelationalAdapter.Luxor.ClientUser.to_business
+        end
+    end
+
     defp execute_transaction(client_user) do
         RelationalAdapter.Luxor.Repository.transaction fn ->
             client_user |>
@@ -32,7 +47,7 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
 
     defp result_transaction(result, actual_state) do
         case result do
-            {:ok, saved_client_user} -> response(saved_client_user.client, actual_state)
+            {:ok, saved_client_user} -> response(saved_client_user, actual_state)
             {:error, error} -> response(error, actual_state)
         end
     end
