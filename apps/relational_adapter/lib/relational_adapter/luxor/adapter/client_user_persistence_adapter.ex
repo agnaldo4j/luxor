@@ -18,7 +18,7 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
 
     def handle_call({:save, client_user}, _from, actual_state) do
         execute_transaction(client_user) |>
-        process_result_transaction(actual_state)
+        result_transaction(actual_state)
     end
 
     defp execute_transaction(client_user) do
@@ -30,14 +30,14 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
         end
     end
 
-    defp process_result_transaction(result, actual_state) do
+    defp result_transaction(result, actual_state) do
         case result do
-            {:ok, saved_client_user} -> save_client_user_response(saved_client_user.client, actual_state)
-            {:error, error} -> save_client_user_response(error, actual_state)
+            {:ok, saved_client_user} -> response(saved_client_user.client, actual_state)
+            {:error, error} -> response(error, actual_state)
         end
     end
 
-    defp save_client_user_response(client_user, actual_state) do
+    defp response(client_user, actual_state) do
         {:reply, client_user, actual_state}
     end
 
