@@ -6,7 +6,8 @@ defmodule Usecase.App do
         tree = [
             worker(Usecase.Luxor.AddUserUsecase, [[], [name: :add_user_usecase]]),
             worker(Usecase.Luxor.AddClientUsecase, [[], [name: :add_client_usecase]]),
-            worker(Usecase.Luxor.AddDeviceUsecase, [[], [name: :add_device_usecase]])
+            worker(Usecase.Luxor.AddDeviceUsecase, [[], [name: :add_device_usecase]]),
+            worker(Usecase.Luxor.AddProducerUsecase, [[], [name: :add_producer_usecase]])
         ]
         opts = [name: Usecase.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)
