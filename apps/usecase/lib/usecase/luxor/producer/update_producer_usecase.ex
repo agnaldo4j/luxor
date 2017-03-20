@@ -7,11 +7,11 @@ defmodule Usecase.Luxor.UpdateProducerUsecase do
     end
 
     def handle_call({:update, command = %Command.Producer.UpdateProducerCommand{}}, _from, actual_state) do
-        updated_producer_model = update_producer(command)
-        {:reply, updated_producer_model, actual_state}
+        result = execute(command)
+        {:reply, result, actual_state}
     end
 
-    defp update_producer(command = %Command.Producer.UpdateProducerCommand{}) do
+    defp execute(command = %Command.Producer.UpdateProducerCommand{}) do
         %Luxor.Producer{
             id: command.id,
             name: command.name,

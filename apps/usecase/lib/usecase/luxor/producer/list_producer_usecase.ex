@@ -6,11 +6,11 @@ defmodule Usecase.Luxor.ListProducerUsecase do
     end
 
     def handle_call({:list, command = %Command.Producer.ListProducerCommand{}}, _from, actual_state) do
-        list_producers_model = list_producers(command)
-        {:reply, list_producers_model, actual_state}
+        result = execute(command)
+        {:reply, result, actual_state}
     end
 
-    defp list_producers(command = %Command.Producer.ListProducerCommand{}) do
+    defp execute(command = %Command.Producer.ListProducerCommand{}) do
         Persistence.Luxor.ProducerPersistenceAdapterApi.list
     end
 end

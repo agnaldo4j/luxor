@@ -6,11 +6,11 @@ defmodule Usecase.Luxor.DeleteProducerUsecase do
     end
 
     def handle_call({:delete, command = %Command.Producer.DeleteProducerCommand{}}, _from, actual_state) do
-        removed_producer_model = remove_producer(command)
-        {:reply, removed_producer_model, actual_state}
+        result = execute(command)
+        {:reply, result, actual_state}
     end
 
-    defp remove_producer(command = %Command.Producer.DeleteProducerCommand{}) do
+    defp execute(command = %Command.Producer.DeleteProducerCommand{}) do
         %Luxor.Producer{id: command.id} |>
         Persistence.Luxor.ProducerPersistenceAdapterApi.delete
     end

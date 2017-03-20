@@ -6,11 +6,11 @@ defmodule Usecase.Luxor.GetProducerUsecase do
     end
 
     def handle_call({:get, command = %Command.Producer.GetProducerCommand{}}, _from, actual_state) do
-        get_producer_model = get_producer(command)
-        {:reply, get_producer_model, actual_state}
+        result = execute(command)
+        {:reply, result, actual_state}
     end
 
-    defp get_producer(command = %Command.Producer.GetProducerCommand{}) do
+    defp execute(command = %Command.Producer.GetProducerCommand{}) do
         %Luxor.Producer{id: command.id} |>
         Persistence.Luxor.ProducerPersistenceAdapterApi.get
     end

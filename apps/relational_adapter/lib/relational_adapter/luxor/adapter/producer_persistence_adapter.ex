@@ -11,7 +11,7 @@ defmodule RelationalAdapter.Luxor.ProducerPersistenceAdapter do
         RelationalAdapter.Luxor.Producer.from_business |>
         RelationalAdapter.Luxor.ProducerRepository.save |>
         RelationalAdapter.Luxor.Producer.to_business |>
-        producer_response(actual_state)
+        response(actual_state)
     end
 
     def handle_call({:delete, producer}, _from, actual_state) do
@@ -19,7 +19,7 @@ defmodule RelationalAdapter.Luxor.ProducerPersistenceAdapter do
         RelationalAdapter.Luxor.ProducerRepository.get |>
         RelationalAdapter.Luxor.ProducerRepository.delete |>
         RelationalAdapter.Luxor.Producer.to_business |>
-        producer_response(actual_state)
+        response(actual_state)
     end
 
     def handle_call({:update, producer}, _from, actual_state) do
@@ -28,7 +28,7 @@ defmodule RelationalAdapter.Luxor.ProducerPersistenceAdapter do
         RelationalAdapter.Luxor.Producer.change_state_to(producer) |>
         RelationalAdapter.Luxor.ProducerRepository.update |>
         RelationalAdapter.Luxor.Producer.to_business |>
-        producer_response(actual_state)
+        response(actual_state)
     end
 
     def handle_call({:list}, _from, actual_state) do
@@ -41,10 +41,10 @@ defmodule RelationalAdapter.Luxor.ProducerPersistenceAdapter do
         producer.id |>
         RelationalAdapter.Luxor.ProducerRepository.get |>
         RelationalAdapter.Luxor.Producer.to_business |>
-        producer_response(actual_state)
+        response(actual_state)
     end
 
-    defp producer_response(producer, actual_state) do
+    defp response(producer, actual_state) do
         {:reply, producer, actual_state}
     end
 
