@@ -1,4 +1,4 @@
-defmodule Command.Producer.AddNewProducerCommand do
+defmodule Command.Producer.SaveProducerCommand do
     defstruct [
         :name,
         :sex,
@@ -6,7 +6,7 @@ defmodule Command.Producer.AddNewProducerCommand do
         :phone
     ]
 
-    @type t :: %Command.Producer.AddNewProducerCommand {
+    @type t :: %Command.Producer.SaveProducerCommand {
         name: String.t,
         sex: String.t,
         cpf: String.t,

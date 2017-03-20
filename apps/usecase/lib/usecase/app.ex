@@ -7,7 +7,10 @@ defmodule Usecase.App do
             worker(Usecase.Luxor.AddUserUsecase, [[], [name: :add_user_usecase]]),
             worker(Usecase.Luxor.AddClientUsecase, [[], [name: :add_client_usecase]]),
             worker(Usecase.Luxor.AddDeviceUsecase, [[], [name: :add_device_usecase]]),
-            worker(Usecase.Luxor.AddProducerUsecase, [[], [name: :add_producer_usecase]])
+            worker(Usecase.Luxor.SaveProducerUsecase, [[], [name: :save_producer_usecase]]),
+            worker(Usecase.Luxor.DeleteProducerUsecase, [[], [name: :delete_producer_usecase]]),
+            worker(Usecase.Luxor.UpdateProducerUsecase, [[], [name: :update_producer_usecase]]),
+            worker(Usecase.Luxor.ListProducerUsecase, [[], [name: :list_producer_usecase]])
         ]
         opts = [name: Usecase.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)
