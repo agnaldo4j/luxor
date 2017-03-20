@@ -14,4 +14,8 @@ defmodule Usecase.Luxor.ProducerUsecaseApi do
     def list(command = %Command.Producer.ListProducerCommand{}) do
         GenServer.call(:list_producer_usecase, {:list, command})
     end
+
+    def get(command = %Command.Producer.GetProducerCommand{}) do
+        GenServer.call(:get_producer_usecase, {:get, command})
+    end
 end

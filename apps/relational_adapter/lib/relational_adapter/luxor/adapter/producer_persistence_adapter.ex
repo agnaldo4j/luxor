@@ -6,14 +6,12 @@ defmodule RelationalAdapter.Luxor.ProducerPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.ProducerPersistenceAdapter, state, opts)
     end
 
-    def handle_call({:list}, _from, actual_state) do
-        result = RelationalAdapter.Luxor.ProducerRepository.get_all()
-        external_list = Enum.map(result, list_to_domain())
-        {:reply, external_list, actual_state}
-    end
-
-    def handle_call({:find_by_id, producer_id}, _from, actual_state) do
-        {:reply, %Luxor.Producer{id: producer_id}, actual_state}
+    def handle_call({:save, producer}, _from, actual_state) do
+        producer |>
+        RelationalAdapter.Luxor.Producer.from_business |>
+        RelationalAdapter.Luxor.ProducerRepository.save |>
+        RelationalAdapter.Luxor.Producer.to_business |>
+        producer_response(actual_state)
     end
 
     def handle_call({:delete, producer}, _from, actual_state) do
@@ -24,19 +22,24 @@ defmodule RelationalAdapter.Luxor.ProducerPersistenceAdapter do
         producer_response(actual_state)
     end
 
-    def handle_call({:save, producer}, _from, actual_state) do
-        producer |>
-        RelationalAdapter.Luxor.Producer.from_business |>
-        RelationalAdapter.Luxor.ProducerRepository.save |>
-        RelationalAdapter.Luxor.Producer.to_business |>
-        producer_response(actual_state)
-    end
-
     def handle_call({:update, producer}, _from, actual_state) do
         producer.id |>
         RelationalAdapter.Luxor.ProducerRepository.get |>
         RelationalAdapter.Luxor.Producer.change_state_to(producer) |>
         RelationalAdapter.Luxor.ProducerRepository.update |>
+        RelationalAdapter.Luxor.Producer.to_business |>
+        producer_response(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.ProducerRepository.get_all()
+        external_list = Enum.map(result, list_to_domain())
+        {:reply, external_list, actual_state}
+    end
+
+    def handle_call({:get, producer}, _from, actual_state) do
+        producer.id |>
+        RelationalAdapter.Luxor.ProducerRepository.get |>
         RelationalAdapter.Luxor.Producer.to_business |>
         producer_response(actual_state)
     end
