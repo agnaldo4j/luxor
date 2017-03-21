@@ -6,25 +6,45 @@ defmodule RelationalAdapter.Luxor.AnalysisPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.AnalysisPersistenceAdapter, state, opts)
     end
 
-    def handle_call(:get_all_analyzes, _from, actual_state) do
-        result = RelationalAdapter.Luxor.AnalysisRepository.keyword_query()
-        external_list = Enum.map(result, list_to_domain())
-        {:reply, external_list, actual_state}
-    end
-
-    def handle_call({:find_analysis_by_id, analysis_id}, _from, actual_state) do
-        {:reply, %Luxor.Analysis{id: analysis_id}, actual_state}
-    end
-
-    def handle_call({:save_analysis, analysis}, _from, actual_state) do
+    def handle_call({:save, analysis}, _from, actual_state) do
         analysis |>
         RelationalAdapter.Luxor.Analysis.from_business |>
         RelationalAdapter.Luxor.AnalysisRepository.save |>
         RelationalAdapter.Luxor.Analysis.to_business |>
-        save_analysis_response(actual_state)
+        response(actual_state)
     end
 
-    defp save_analysis_response(analysis, actual_state) do
+    def handle_call({:delete, analysis}, _from, actual_state) do
+        analysis.id |>
+        RelationalAdapter.Luxor.AnalysisRepository.get |>
+        RelationalAdapter.Luxor.AnalysisRepository.delete |>
+        RelationalAdapter.Luxor.Analysis.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:update, analysis}, _from, actual_state) do
+        analysis.id |>
+        RelationalAdapter.Luxor.AnalysisRepository.get |>
+        RelationalAdapter.Luxor.Analysis.change_state_to(analysis) |>
+        RelationalAdapter.Luxor.AnalysisRepository.update |>
+        RelationalAdapter.Luxor.Analysis.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.AnalysisRepository.get_all()
+        external_list = Enum.map(result, list_to_domain())
+        {:reply, external_list, actual_state}
+    end
+
+    def handle_call({:get, analysis}, _from, actual_state) do
+        analysis.id |>
+        RelationalAdapter.Luxor.AnalysisRepository.get |>
+        RelationalAdapter.Luxor.Analysis.to_business |>
+        response(actual_state)
+    end
+
+    defp response(analysis, actual_state) do
         {:reply, analysis, actual_state}
     end
 
