@@ -9,8 +9,18 @@ defmodule RelationalAdapter.Luxor.ClientRepository do
         RelationalAdapter.Luxor.Repository.update!(changeset)
     end
 
-    def delete(changeset) do
+    def delete(changeset = %RelationalAdapter.Luxor.Client{}) do
       RelationalAdapter.Luxor.Repository.delete!(changeset)
+    end
+
+    def delete(changeset = %RelationalAdapter.Luxor.ClientUser{}) do
+      RelationalAdapter.Luxor.Repository.delete!(changeset.client)
+      changeset
+    end
+
+    def delete(changeset = %RelationalAdapter.Luxor.ClientUser{}) do
+      RelationalAdapter.Luxor.Repository.delete!(changeset.client)
+      changeset
     end
 
     def get(id) do

@@ -6,16 +6,6 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.ClientUserPersistenceAdapter, state, opts)
     end
 
-    def handle_call({:list}, _from, actual_state) do
-        result = RelationalAdapter.Luxor.ClientUserRepository.get_all()
-        external_list = Enum.map(result, list_to_domain())
-        {:reply, external_list, actual_state}
-    end
-
-    def handle_call({:get, client_user}, _from, actual_state) do
-        {:reply, %Luxor.ClientUser{id: client_user}, actual_state}
-    end
-
     def handle_call({:save, client_user}, _from, actual_state) do
         execute_transaction(client_user) |>
         result_transaction(actual_state)
@@ -24,6 +14,34 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
     def handle_call({:update, client_user}, _from, actual_state) do
         execute_update_transaction(client_user) |>
         result_transaction(actual_state)
+    end
+
+    def handle_call({:delete, client_user}, _from, actual_state) do
+        execute_delete_transaction(client_user) |>
+        result_transaction(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.ClientUserRepository.get_all()
+        external_list = Enum.map(result, list_to_domain())
+        {:reply, external_list, actual_state}
+    end
+
+    def handle_call({:get, client_user}, _from, actual_state) do
+        result = client_user.id |>
+        RelationalAdapter.Luxor.ClientUserRepository.get |>
+        response(actual_state)
+    end
+
+    defp execute_delete_transaction(client_user) do
+        RelationalAdapter.Luxor.Repository.transaction fn ->
+            client_user.id |>
+            RelationalAdapter.Luxor.ClientUserRepository.get |>
+            RelationalAdapter.Luxor.ClientUserRepository.delete |>
+            RelationalAdapter.Luxor.ClientRepository.delete |>
+            RelationalAdapter.Luxor.UserRepository.delete |>
+            RelationalAdapter.Luxor.ClientUser.to_business
+        end
     end
 
     defp execute_update_transaction(client_user) do
