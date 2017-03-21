@@ -21,7 +21,7 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
         result_transaction(actual_state)
     end
 
-    def handle_call({:delete, client_user}, _from, actual_state) do
+    def handle_call({:update, client_user}, _from, actual_state) do
         execute_update_transaction(client_user) |>
         result_transaction(actual_state)
     end

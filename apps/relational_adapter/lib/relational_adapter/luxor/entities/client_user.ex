@@ -23,7 +23,7 @@ defmodule RelationalAdapter.Luxor.ClientUser do
     end
 
    def change_state_to(actual_state = %RelationalAdapter.Luxor.ClientUser{}, domain = %Luxor.ClientUser{}) do
-      #changeset(actual_state, update_build_params(actual_state, domain))
+      changeset(actual_state, update_build_params(actual_state, domain))
     end
 
     def to_business(client_user = %RelationalAdapter.Luxor.ClientUser{}) do
@@ -37,34 +37,14 @@ defmodule RelationalAdapter.Luxor.ClientUser do
     end
 
     defp build_params(domain) do
-      client = build_client_params(domain.client)
-      user = build_user_params(domain.user)
-      %{
-        id: domain.id,
-        created: domain.created,
-        updated: domain.updated,
-        client: client,
-        user: user
-      }
+      client = %{id: domain.client.id, created: domain.client.created, updated: domain.client.updated, name: domain.client.name}
+      user = %{id: domain.user.id, created: domain.user.created, updated: domain.user.updated, email: domain.user.email, password: domain.user.password, active: domain.user.active}
+      %{id: domain.id, created: domain.created, updated: domain.updated, client: client, user: user}
     end
 
-    defp build_client_params(domain) do
-      %{
-        id: domain.id,
-        created: domain.created,
-        updated: domain.updated,
-        name: domain.name
-      }
-    end
-
-    defp build_user_params(domain) do
-      %{
-        id: domain.id,
-        created: domain.created,
-        updated: domain.updated,
-        email: domain.email,
-        password: domain.password,
-        active: domain.active
-      }
+    defp update_build_params(actual_state, domain) do
+        client = %{id: actual_state.client.id, created: actual_state.client.created, updated: DateTime.today, name: domain.client.name}
+        user = %{id: actual_state.user.id, created: actual_state.user.created, updated: DateTime.today, email: domain.user.email, password: domain.user.password, active: domain.user.active}
+        %{id: actual_state.id, created: actual_state.created, updated: DateTime.today, client: client, user: user}
     end
 end

@@ -5,8 +5,14 @@ defmodule RelationalAdapter.Luxor.ClientUserRepository do
         RelationalAdapter.Luxor.Repository.insert!(changeset)
     end
 
+    def update(changeset) do
+        RelationalAdapter.Luxor.Repository.update!(changeset)
+    end
+
     def get(id) do
-      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.ClientUser, id)
+      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.ClientUser, id) |>
+      RelationalAdapter.Luxor.Repository.preload(:client) |>
+      RelationalAdapter.Luxor.Repository.preload(:user)
     end
 
     def get_all do

@@ -6,6 +6,7 @@ defmodule Usecase.App do
         tree = [
             worker(Usecase.Luxor.AddUserUsecase, [[], [name: :add_user_usecase]]),
             worker(Usecase.Luxor.SaveClientUserUsecase, [[], [name: :save_client_user_usecase]]),
+            worker(Usecase.Luxor.UpdateClientUserUsecase, [[], [name: :update_client_user_usecase]]),
             worker(Usecase.Luxor.AddDeviceUsecase, [[], [name: :add_device_usecase]]),
             worker(Usecase.Luxor.SaveProducerUsecase, [[], [name: :save_producer_usecase]]),
             worker(Usecase.Luxor.DeleteProducerUsecase, [[], [name: :delete_producer_usecase]]),
