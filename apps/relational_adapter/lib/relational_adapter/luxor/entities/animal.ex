@@ -14,12 +14,16 @@ defmodule RelationalAdapter.Luxor.Animal do
     def changeset(animal, params \\ %{}) do
         animal
         |> cast(params, [:id, :created, :updated, :register_number, :breed])
-        |> cast_assoc(:producer)
+        |> assoc_constraint(:producer)
         |> validate_required([:id, :created, :updated, :register_number, :breed, :producer])
     end
 
     def from_business(domain = %Luxor.Animal{}) do
         changeset(%RelationalAdapter.Luxor.Animal{}, build_params(domain))
+    end
+
+    def change_state_to(actual_state = %RelationalAdapter.Luxor.Animal{}, domain = %Luxor.Animal{}) do
+      changeset(actual_state, update_build_params(actual_state, domain))
     end
 
     def to_business(animal = %RelationalAdapter.Luxor.Animal{}) do
@@ -38,6 +42,17 @@ defmodule RelationalAdapter.Luxor.Animal do
             id: domain.id,
             created: domain.created,
             updated: domain.updated,
+            register_number: domain.register_number,
+            breed: domain.breed,
+            producer: domain.producer
+        }
+    end
+
+    defp update_build_params(actual_state, domain) do
+        %{
+            id: actual_state.id,
+            created: actual_state.created,
+            updated: DateTime.today,
             register_number: domain.register_number,
             breed: domain.breed,
             producer: domain.producer

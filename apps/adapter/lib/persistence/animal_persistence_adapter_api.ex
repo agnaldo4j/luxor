@@ -1,5 +1,5 @@
 defmodule Persistence.Luxor.AnimalPersistenceAdapterApi do
-    def save(analysis = %Luxor.Animal{}) do
+    def save(animal = %Luxor.Animal{}) do
         GenServer.call(:animal_persistence_adapter, {:save, animal})
     end
 
