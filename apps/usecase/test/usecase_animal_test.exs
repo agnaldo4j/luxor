@@ -6,38 +6,62 @@ defmodule Usecase.AnimalTest do
   doctest Usecase.Luxor.ListAnimalUsecase
   doctest Usecase.Luxor.GetAnimalUsecase
 
-    @tag :AnimalTest
-    test "add new animal by persistence adapter" do
-        result = Usecase.Luxor.AnimalUsecaseApi.save(
-            %Command.Animal.SaveAnimalCommand{
-                name: "teste"
+    defp create_producer() do
+        Usecase.Luxor.ProducerUsecaseApi.save(
+            %Command.Producer.SaveProducerCommand{
+                name: "teste",
+                sex: "male",
+                cpf: "11111111111",
+                phone: "4799715555"
             }
         )
-        assert result.name == "teste"
     end
 
     @tag :AnimalTest
+    test "add new animal by persistence adapter" do
+        saved_producer = create_producer()
+        result = Usecase.Luxor.AnimalUsecaseApi.save(
+            %Command.Animal.SaveAnimalCommand{
+                register_number: "123456789",
+                breed: "teste",
+                producer_id: saved_producer.id
+            }
+        )
+        assert result.register_number == "123456789"
+    end
+
+
+    @tag :AnimalTest
     test "update animal by persistence adapter" do
+        saved_producer = create_producer()
         saved_animal = Usecase.Luxor.AnimalUsecaseApi.save(
             %Command.Animal.SaveAnimalCommand{
-                name: "teste"
+                register_number: "123456789",
+                breed: "teste",
+                producer_id: saved_producer.id
             }
         )
 
+        new_producer = create_producer()
         result = Usecase.Luxor.AnimalUsecaseApi.update(
-            %Command.Animal.UpdateAnimalCommand{
+            %Command.Animal.UpdateAnimalCommand {
                 id: saved_animal.id,
-                name: "teste2"
+                register_number: "098765431",
+                breed: "nova",
+                producer_id: new_producer.id
             }
         )
-        assert result.name == "teste2"
+        assert result.register_number == "098765431"
     end
 
     @tag :AnimalTest
     test "remove animal by persistence adapter" do
+        saved_producer = create_producer()
         saved_animal = Usecase.Luxor.AnimalUsecaseApi.save(
             %Command.Animal.SaveAnimalCommand{
-                name: "teste"
+                register_number: "123456789",
+                breed: "teste",
+                producer_id: saved_producer.id
             }
         )
 
@@ -46,14 +70,17 @@ defmodule Usecase.AnimalTest do
                 id: saved_animal.id
             }
         )
-        assert result.name == "teste"
+        assert result.register_number == "123456789"
     end
 
     @tag :AnimalTest
     test "list animal by persistence adapter" do
+        saved_producer = create_producer()
         Usecase.Luxor.AnimalUsecaseApi.save(
             %Command.Animal.SaveAnimalCommand{
-                name: "teste"
+                register_number: "123456789",
+                breed: "teste",
+                producer_id: saved_producer.id
             }
         )
 
@@ -65,9 +92,12 @@ defmodule Usecase.AnimalTest do
 
     @tag :AnimalTest
     test "get animal by persistence adapter" do
+        saved_producer = create_producer()
         saved_animal = Usecase.Luxor.AnimalUsecaseApi.save(
             %Command.Animal.SaveAnimalCommand{
-                name: "teste"
+                register_number: "123456789",
+                breed: "teste",
+                producer_id: saved_producer.id
             }
         )
 
@@ -76,6 +106,6 @@ defmodule Usecase.AnimalTest do
                 id: saved_animal.id
             }
         )
-        assert result.name == "teste"
+        assert result.register_number == "123456789"
     end
 end

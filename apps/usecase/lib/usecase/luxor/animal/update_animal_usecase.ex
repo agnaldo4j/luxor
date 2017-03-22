@@ -12,7 +12,22 @@ defmodule Usecase.Luxor.UpdateAnimalUsecase do
     end
 
     defp execute(command = %Command.Animal.UpdateAnimalCommand{}) do
-        %Luxor.Animal{id: command.id,register_number: command.register_number,breed: command.breed,producer: command.producer} |>
+        get_producer(command.producer_id) |>
+        build_animal_with(command) |>
         Persistence.Luxor.AnimalPersistenceAdapterApi.update
+    end
+
+    defp get_producer(producer_id) do
+        %Luxor.Producer{id: producer_id} |>
+        Persistence.Luxor.ProducerPersistenceAdapterApi.get
+    end
+
+    defp build_animal_with(producer, command) do
+      %Luxor.Animal{
+        id: command.id,
+        register_number: command.register_number,
+        breed: command.breed,
+        producer: producer
+      }
     end
 end

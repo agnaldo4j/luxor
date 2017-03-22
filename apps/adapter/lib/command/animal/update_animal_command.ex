@@ -4,13 +4,13 @@ defmodule Command.Animal.UpdateAnimalCommand do
         :id,
         :register_number,
         :breed,
-        :producer
+        :producer_id
     ]
 
     @type t :: %Command.Animal.UpdateAnimalCommand {
         id: String.t,
         register_number: String.t,
         breed: String.t,
-        producer: Luxor.Producer.t
+        producer_id: Integer.t
     }
 end

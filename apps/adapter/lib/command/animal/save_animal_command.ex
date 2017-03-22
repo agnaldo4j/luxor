@@ -2,12 +2,12 @@ defmodule Command.Animal.SaveAnimalCommand do
     defstruct [
         :register_number,
         :breed,
-        :producer
+        :producer_id
     ]
 
     @type t :: %Command.Animal.SaveAnimalCommand {
         register_number: String.t,
         breed: String.t,
-        producer: Luxor.Producer.t
+        producer_id: Integer.t
     }
 end

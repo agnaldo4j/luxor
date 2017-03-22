@@ -11,8 +11,23 @@ defmodule Usecase.Luxor.SaveAnimalUsecase do
     end
 
     defp execute(command = %Command.Animal.SaveAnimalCommand{}) do
-        %Luxor.Animal{register_number: command.register_number, breed: command.breed, producer: command.producer} |>
+        get_producer(command.producer_id) |>
+        build_animal_with(command) |>
         Luxor.Animal.identify |>
         Persistence.Luxor.AnimalPersistenceAdapterApi.save
+
+    end
+
+    defp get_producer(producer_id) do
+        %Luxor.Producer{id: producer_id} |>
+        Persistence.Luxor.ProducerPersistenceAdapterApi.get
+    end
+
+    defp build_animal_with(producer, command) do
+      %Luxor.Animal{
+        register_number: command.register_number,
+        breed: command.breed,
+        producer: producer
+      }
     end
 end

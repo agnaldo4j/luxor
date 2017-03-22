@@ -38,7 +38,7 @@ defmodule RelationalAdapter.Luxor.Producer do
         }
     end
 
-    defp build_params(domain) do
+    def build_params(domain) do
         %{
             id: domain.id,
             created: domain.created,
