@@ -23,7 +23,13 @@ defmodule Usecase.App do
             worker(Usecase.Luxor.DeleteAnalysisUsecase, [[], [name: :delete_analysis_usecase]]),
             worker(Usecase.Luxor.UpdateAnalysisUsecase, [[], [name: :update_analysis_usecase]]),
             worker(Usecase.Luxor.ListAnalysisUsecase, [[], [name: :list_analysis_usecase]]),
-            worker(Usecase.Luxor.GetAnalysisUsecase, [[], [name: :get_analysis_usecase]])
+            worker(Usecase.Luxor.GetAnalysisUsecase, [[], [name: :get_analysis_usecase]]),
+
+            worker(Usecase.Luxor.SaveAnimalUsecase, [[], [name: :save_animal_usecase]]),
+            worker(Usecase.Luxor.DeleteAnimalUsecase, [[], [name: :delete_animal_usecase]]),
+            worker(Usecase.Luxor.UpdateAnimalUsecase, [[], [name: :update_animal_usecase]]),
+            worker(Usecase.Luxor.ListAnimalUsecase, [[], [name: :list_animal_usecase]]),
+            worker(Usecase.Luxor.GetAnimalUsecase, [[], [name: :get_animal_usecase]])
         ]
         opts = [name: Usecase.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)
