@@ -16,6 +16,10 @@ defmodule RelationalAdapter.Luxor.Device do
         |> validate_required([:id, :created, :updated, :serial_number, :name])
     end
 
+    def change_state_to(actual_state = %RelationalAdapter.Luxor.Device{}, domain = %Luxor.Device{}) do
+      changeset(actual_state, update_build_params(actual_state, domain))
+    end
+
     def from_business(domain = %Luxor.Device{}) do
         changeset(%RelationalAdapter.Luxor.Device{}, build_params(domain))
     end
@@ -35,6 +39,16 @@ defmodule RelationalAdapter.Luxor.Device do
             id: domain.id,
             created: domain.created,
             updated: domain.updated,
+            serial_number: domain.serial_number,
+            name: domain.name
+        }
+    end
+
+    defp update_build_params(actual_state, domain) do
+        %{
+            id: actual_state.id,
+            created: actual_state.created,
+            updated: DateTime.today,
             serial_number: domain.serial_number,
             name: domain.name
         }

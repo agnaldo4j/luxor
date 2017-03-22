@@ -5,7 +5,6 @@ defmodule Usecase.App do
         import Supervisor.Spec
         tree = [
             worker(Usecase.Luxor.AddUserUsecase, [[], [name: :add_user_usecase]]),
-            worker(Usecase.Luxor.AddDeviceUsecase, [[], [name: :add_device_usecase]]),
 
             worker(Usecase.Luxor.SaveClientUserUsecase, [[], [name: :save_client_user_usecase]]),
             worker(Usecase.Luxor.UpdateClientUserUsecase, [[], [name: :update_client_user_usecase]]),
@@ -29,7 +28,13 @@ defmodule Usecase.App do
             worker(Usecase.Luxor.DeleteAnimalUsecase, [[], [name: :delete_animal_usecase]]),
             worker(Usecase.Luxor.UpdateAnimalUsecase, [[], [name: :update_animal_usecase]]),
             worker(Usecase.Luxor.ListAnimalUsecase, [[], [name: :list_animal_usecase]]),
-            worker(Usecase.Luxor.GetAnimalUsecase, [[], [name: :get_animal_usecase]])
+            worker(Usecase.Luxor.GetAnimalUsecase, [[], [name: :get_animal_usecase]]),
+
+            worker(Usecase.Luxor.SaveDeviceUsecase, [[], [name: :save_device_usecase]]),
+            worker(Usecase.Luxor.DeleteDeviceUsecase, [[], [name: :delete_device_usecase]]),
+            worker(Usecase.Luxor.UpdateDeviceUsecase, [[], [name: :update_device_usecase]]),
+            worker(Usecase.Luxor.ListDeviceUsecase, [[], [name: :list_device_usecase]]),
+            worker(Usecase.Luxor.GetDeviceUsecase, [[], [name: :get_device_usecase]])
         ]
         opts = [name: Usecase.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)

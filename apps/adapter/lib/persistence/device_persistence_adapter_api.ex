@@ -1,14 +1,21 @@
 defmodule Persistence.Luxor.DevicePersistenceAdapterApi do
-    def get_all_devices do
-        GenServer.call(:device_persistence_adapter, :get_all_devices)
-    end
-
     def save(device = %Luxor.Device{}) do
-        GenServer.call(:device_persistence_adapter, {:save_device, device})
+        GenServer.call(:device_persistence_adapter, {:save, device})
     end
 
-    def find_by_id(id) do
-        GenServer.call(:device_persistence_adapter, {:find_device_by_id, id})
+    def update(device = %Luxor.Device{}) do
+      GenServer.call(:device_persistence_adapter, {:update, device})
     end
 
+    def delete(device = %Luxor.Device{}) do
+      GenServer.call(:device_persistence_adapter, {:delete, device})
+    end
+
+    def list() do
+        GenServer.call(:device_persistence_adapter, {:list})
+    end
+
+    def get(device = %Luxor.Device{}) do
+        GenServer.call(:device_persistence_adapter, {:get, device})
+    end
 end

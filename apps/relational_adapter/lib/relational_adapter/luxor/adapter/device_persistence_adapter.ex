@@ -6,29 +6,49 @@ defmodule RelationalAdapter.Luxor.DevicePersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.DevicePersistenceAdapter, state, opts)
     end
 
-    def handle_call(:get_all_devices, _from, actual_state) do
-        result = RelationalAdapter.Luxor.DeviceRepository.keyword_query()
+    def handle_call({:save, analysis}, _from, actual_state) do
+        analysis |>
+        RelationalAdapter.Luxor.Device.from_business |>
+        RelationalAdapter.Luxor.DeviceRepository.save |>
+        RelationalAdapter.Luxor.Device.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:delete, analysis}, _from, actual_state) do
+        analysis.id |>
+        RelationalAdapter.Luxor.DeviceRepository.get |>
+        RelationalAdapter.Luxor.DeviceRepository.delete |>
+        RelationalAdapter.Luxor.Device.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:update, analysis}, _from, actual_state) do
+        analysis.id |>
+        RelationalAdapter.Luxor.DeviceRepository.get |>
+        RelationalAdapter.Luxor.Device.change_state_to(analysis) |>
+        RelationalAdapter.Luxor.DeviceRepository.update |>
+        RelationalAdapter.Luxor.Device.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.DeviceRepository.get_all()
         external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}
     end
 
-    def handle_call({:find_device_by_id, device_id}, _from, actual_state) do
-        {:reply, %Luxor.Device{id: device_id}, actual_state}
-    end
-
-    def handle_call({:save_device, device}, _from, actual_state) do
-        device |>
-        RelationalAdapter.Luxor.Device.from_business |>
-        RelationalAdapter.Luxor.DeviceRepository.save |>
+    def handle_call({:get, analysis}, _from, actual_state) do
+        analysis.id |>
+        RelationalAdapter.Luxor.DeviceRepository.get |>
         RelationalAdapter.Luxor.Device.to_business |>
-        save_device_response(actual_state)
+        response(actual_state)
     end
 
-    defp save_device_response(device, actual_state) do
-        {:reply, device, actual_state}
+    defp response(analysis, actual_state) do
+        {:reply, analysis, actual_state}
     end
 
     defp list_to_domain() do
-        fn(device) -> RelationalAdapter.Luxor.Device.to_business(device) end
+        fn(analysis) -> RelationalAdapter.Luxor.Device.to_business(analysis) end
     end
 end
