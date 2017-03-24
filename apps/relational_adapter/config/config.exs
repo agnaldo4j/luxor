@@ -33,4 +33,7 @@ config :relational_adapter, RelationalAdapter.Luxor.Repository,
   database: "luxor_dev",
   username: "luxor",
   password: "luxor2n6g0o2n",
-  hostname: "luxor-dev.cqwyyfi1pky6.us-east-1.rds.amazonaws.com"
+  hostname: "luxor-dev.cqwyyfi1pky6.us-east-1.rds.amazonaws.com",
+  handshake_timeout: 15000,
+  pool_size: 10,
+  pool_timeout: 15000
