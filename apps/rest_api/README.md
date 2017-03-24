@@ -1,6 +1,6 @@
-# Profitability
+# Rest API
 
-**TODO: Add description**
+**Camada responsavel pela comunicacao com clientes**
 
 ## Installation
 

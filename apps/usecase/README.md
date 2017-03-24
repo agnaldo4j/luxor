@@ -1,6 +1,6 @@
 # Usecase
 
-**TODO: Add description**
+**Regras de negocio da aplicacao**
 
 ## Installation
 
