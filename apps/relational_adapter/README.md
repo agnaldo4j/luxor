@@ -3,8 +3,11 @@
 **Acesso a banco de dados relacional usando ecto**
 
 [Adaptadores entre negocio e persistencia](https://github.com/agnaldo4j/luxor/tree/develop/apps/relational_adapter/lib/relational_adapter/luxor/adapter)
+
 [Entidades de acesso a persistencia](https://github.com/agnaldo4j/luxor/tree/develop/apps/relational_adapter/lib/relational_adapter/luxor/entities)
+
 [Execucao de comando na persistencia](https://github.com/agnaldo4j/luxor/tree/develop/apps/relational_adapter/lib/relational_adapter/luxor/repositories)
+
 [Manutencao de esquema](https://github.com/agnaldo4j/luxor/tree/develop/apps/relational_adapter/priv/repository/migrations)
 
 ## Installation
