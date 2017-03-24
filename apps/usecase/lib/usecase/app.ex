@@ -34,7 +34,13 @@ defmodule Usecase.App do
             worker(Usecase.Luxor.DeleteDeviceUsecase, [[], [name: :delete_device_usecase]]),
             worker(Usecase.Luxor.UpdateDeviceUsecase, [[], [name: :update_device_usecase]]),
             worker(Usecase.Luxor.ListDeviceUsecase, [[], [name: :list_device_usecase]]),
-            worker(Usecase.Luxor.GetDeviceUsecase, [[], [name: :get_device_usecase]])
+            worker(Usecase.Luxor.GetDeviceUsecase, [[], [name: :get_device_usecase]]),
+
+            worker(Usecase.Luxor.SaveFarmUsecase, [[], [name: :save_farm_usecase]]),
+            worker(Usecase.Luxor.DeleteFarmUsecase, [[], [name: :delete_farm_usecase]]),
+            worker(Usecase.Luxor.UpdateFarmUsecase, [[], [name: :update_farm_usecase]]),
+            worker(Usecase.Luxor.ListFarmUsecase, [[], [name: :list_farm_usecase]]),
+            worker(Usecase.Luxor.GetFarmUsecase, [[], [name: :get_farm_usecase]])
         ]
         opts = [name: Usecase.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)
