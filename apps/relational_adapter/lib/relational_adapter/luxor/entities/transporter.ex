@@ -15,6 +15,10 @@ defmodule RelationalAdapter.Luxor.Transporter do
         |> validate_required([:id, :created, :updated, :name])
     end
 
+    def change_state_to(actual_state = %RelationalAdapter.Luxor.Transporter{}, domain = %Luxor.Transporter{}) do
+      changeset(actual_state, update_build_params(actual_state, domain))
+    end
+
     def from_business(domain = %Luxor.Transporter{}) do
         changeset(%RelationalAdapter.Luxor.Transporter{}, build_params(domain))
     end
@@ -33,6 +37,15 @@ defmodule RelationalAdapter.Luxor.Transporter do
             id: domain.id,
             created: domain.created,
             updated: domain.updated,
+            name: domain.name
+        }
+    end
+
+    defp update_build_params(actual_state, domain) do
+        %{
+            id: actual_state.id,
+            created: actual_state.created,
+            updated: DateTime.today,
             name: domain.name
         }
     end

@@ -6,29 +6,49 @@ defmodule RelationalAdapter.Luxor.TransporterPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.TransporterPersistenceAdapter, state, opts)
     end
 
-    def handle_call(:get_all_transporters, _from, actual_state) do
-        result = RelationalAdapter.Luxor.TransporterRepository.keyword_query()
+    def handle_call({:save, manager}, _from, actual_state) do
+        manager |>
+        RelationalAdapter.Luxor.Transporter.from_business |>
+        RelationalAdapter.Luxor.TransporterRepository.save |>
+        RelationalAdapter.Luxor.Transporter.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:delete, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TransporterRepository.get |>
+        RelationalAdapter.Luxor.TransporterRepository.delete |>
+        RelationalAdapter.Luxor.Transporter.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:update, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TransporterRepository.get |>
+        RelationalAdapter.Luxor.Transporter.change_state_to(manager) |>
+        RelationalAdapter.Luxor.TransporterRepository.update |>
+        RelationalAdapter.Luxor.Transporter.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.TransporterRepository.get_all()
         external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}
     end
 
-    def handle_call({:find_transporter_by_id, transporter_id}, _from, actual_state) do
-        {:reply, %Luxor.Transporter{id: transporter_id}, actual_state}
-    end
-
-    def handle_call({:save_transporter, transporter}, _from, actual_state) do
-        transporter |>
-        RelationalAdapter.Luxor.Transporter.from_business |>
-        RelationalAdapter.Luxor.TransporterRepository.save |>
+    def handle_call({:get, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TransporterRepository.get |>
         RelationalAdapter.Luxor.Transporter.to_business |>
-        save_transporter_response(actual_state)
+        response(actual_state)
     end
 
-    defp save_transporter_response(transporter, actual_state) do
-        {:reply, transporter, actual_state}
+    defp response(manager, actual_state) do
+        {:reply, manager, actual_state}
     end
 
     defp list_to_domain() do
-        fn(transporter) -> RelationalAdapter.Luxor.Transporter.to_business(transporter) end
+        fn(manager) -> RelationalAdapter.Luxor.Transporter.to_business(manager) end
     end
 end
