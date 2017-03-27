@@ -58,7 +58,13 @@ defmodule Usecase.App do
             worker(Usecase.Luxor.DeleteTruckUsecase, [[], [name: :delete_truck_usecase]]),
             worker(Usecase.Luxor.UpdateTruckUsecase, [[], [name: :update_truck_usecase]]),
             worker(Usecase.Luxor.ListTruckUsecase, [[], [name: :list_truck_usecase]]),
-            worker(Usecase.Luxor.GetTruckUsecase, [[], [name: :get_truck_usecase]])
+            worker(Usecase.Luxor.GetTruckUsecase, [[], [name: :get_truck_usecase]]),
+
+            worker(Usecase.Luxor.SaveTruckDriverUsecase, [[], [name: :save_truck_driver_usecase]]),
+            worker(Usecase.Luxor.DeleteTruckDriverUsecase, [[], [name: :delete_truck_driver_usecase]]),
+            worker(Usecase.Luxor.UpdateTruckDriverUsecase, [[], [name: :update_truck_driver_usecase]]),
+            worker(Usecase.Luxor.ListTruckDriverUsecase, [[], [name: :list_truck_driver_usecase]]),
+            worker(Usecase.Luxor.GetTruckDriverUsecase, [[], [name: :get_truck_driver_usecase]])
         ]
         opts = [name: Usecase.Sup, strategy: :one_for_one]
         Supervisor.start_link(tree, opts)

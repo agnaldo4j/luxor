@@ -6,29 +6,49 @@ defmodule RelationalAdapter.Luxor.TruckDriverPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.TruckDriverPersistenceAdapter, state, opts)
     end
 
-    def handle_call(:get_all_truckDrivers, _from, actual_state) do
-        result = RelationalAdapter.Luxor.TruckDriverRepository.keyword_query()
+    def handle_call({:save, manager}, _from, actual_state) do
+        manager |>
+        RelationalAdapter.Luxor.TruckDriver.from_business |>
+        RelationalAdapter.Luxor.TruckDriverRepository.save |>
+        RelationalAdapter.Luxor.TruckDriver.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:delete, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TruckDriverRepository.get |>
+        RelationalAdapter.Luxor.TruckDriverRepository.delete |>
+        RelationalAdapter.Luxor.TruckDriver.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:update, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TruckDriverRepository.get |>
+        RelationalAdapter.Luxor.TruckDriver.change_state_to(manager) |>
+        RelationalAdapter.Luxor.TruckDriverRepository.update |>
+        RelationalAdapter.Luxor.TruckDriver.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.TruckDriverRepository.get_all()
         external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}
     end
 
-    def handle_call({:find_truckDriver_by_id, truckDriver_id}, _from, actual_state) do
-        {:reply, %Luxor.TruckDriver{id: truckDriver_id}, actual_state}
-    end
-
-    def handle_call({:save_truckDriver, truckDriver}, _from, actual_state) do
-        truckDriver |>
-        RelationalAdapter.Luxor.TruckDriver.from_business |>
-        RelationalAdapter.Luxor.TruckDriverRepository.save |>
+    def handle_call({:get, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TruckDriverRepository.get |>
         RelationalAdapter.Luxor.TruckDriver.to_business |>
-        save_truckDriver_response(actual_state)
+        response(actual_state)
     end
 
-    defp save_truckDriver_response(truckDriver, actual_state) do
-        {:reply, truckDriver, actual_state}
+    defp response(manager, actual_state) do
+        {:reply, manager, actual_state}
     end
 
     defp list_to_domain() do
-        fn(truckDriver) -> RelationalAdapter.Luxor.TruckDriver.to_business(truckDriver) end
+        fn(manager) -> RelationalAdapter.Luxor.TruckDriver.to_business(manager) end
     end
 end
