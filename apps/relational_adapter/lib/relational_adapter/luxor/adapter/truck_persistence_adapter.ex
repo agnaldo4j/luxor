@@ -6,29 +6,49 @@ defmodule RelationalAdapter.Luxor.TruckPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.TruckPersistenceAdapter, state, opts)
     end
 
-    def handle_call(:get_all_trucks, _from, actual_state) do
-        result = RelationalAdapter.Luxor.TruckRepository.keyword_query()
+    def handle_call({:save, manager}, _from, actual_state) do
+        manager |>
+        RelationalAdapter.Luxor.Truck.from_business |>
+        RelationalAdapter.Luxor.TruckRepository.save |>
+        RelationalAdapter.Luxor.Truck.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:delete, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TruckRepository.get |>
+        RelationalAdapter.Luxor.TruckRepository.delete |>
+        RelationalAdapter.Luxor.Truck.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:update, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TruckRepository.get |>
+        RelationalAdapter.Luxor.Truck.change_state_to(manager) |>
+        RelationalAdapter.Luxor.TruckRepository.update |>
+        RelationalAdapter.Luxor.Truck.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.TruckRepository.get_all()
         external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}
     end
 
-    def handle_call({:find_truck_by_id, truck_id}, _from, actual_state) do
-        {:reply, %Luxor.Truck{id: truck_id}, actual_state}
-    end
-
-    def handle_call({:save_truck, truck}, _from, actual_state) do
-        truck |>
-        RelationalAdapter.Luxor.Truck.from_business |>
-        RelationalAdapter.Luxor.TruckRepository.save |>
+    def handle_call({:get, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.TruckRepository.get |>
         RelationalAdapter.Luxor.Truck.to_business |>
-        save_truck_response(actual_state)
+        response(actual_state)
     end
 
-    defp save_truck_response(truck, actual_state) do
-        {:reply, truck, actual_state}
+    defp response(manager, actual_state) do
+        {:reply, manager, actual_state}
     end
 
     defp list_to_domain() do
-        fn(truck) -> RelationalAdapter.Luxor.Truck.to_business(truck) end
+        fn(manager) -> RelationalAdapter.Luxor.Truck.to_business(manager) end
     end
 end
