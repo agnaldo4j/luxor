@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListProducerUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Producer.ListProducerCommand{}) do
+    defp execute(_command = %Command.Producer.ListProducerCommand{}) do
         Persistence.Luxor.ProducerPersistenceAdapterApi.list
     end
 end

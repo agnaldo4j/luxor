@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListDeviceUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Device.ListDeviceCommand{}) do
+    defp execute(_command = %Command.Device.ListDeviceCommand{}) do
         Persistence.Luxor.DevicePersistenceAdapterApi.list
     end
 end

@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListAnalysisUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Analysis.ListAnalysisCommand{}) do
+    defp execute(_command = %Command.Analysis.ListAnalysisCommand{}) do
         Persistence.Luxor.AnalysisPersistenceAdapterApi.list
     end
 end

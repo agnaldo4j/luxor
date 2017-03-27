@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListAnimalUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Animal.ListAnimalCommand{}) do
+    defp execute(_command = %Command.Animal.ListAnimalCommand{}) do
         Persistence.Luxor.AnimalPersistenceAdapterApi.list
     end
 end

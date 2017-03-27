@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListTruckDriverUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.TruckDriver.ListTruckDriverCommand{}) do
+    defp execute(_command = %Command.TruckDriver.ListTruckDriverCommand{}) do
         Persistence.Luxor.TruckDriverPersistenceAdapterApi.list
     end
 end

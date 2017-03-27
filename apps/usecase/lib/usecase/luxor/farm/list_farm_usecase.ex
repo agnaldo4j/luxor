@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListFarmUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Farm.ListFarmCommand{}) do
+    defp execute(_command = %Command.Farm.ListFarmCommand{}) do
         Persistence.Luxor.FarmPersistenceAdapterApi.list
     end
 end

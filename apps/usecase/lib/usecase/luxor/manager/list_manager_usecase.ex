@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListManagerUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Manager.ListManagerCommand{}) do
+    defp execute(_command = %Command.Manager.ListManagerCommand{}) do
         Persistence.Luxor.ManagerPersistenceAdapterApi.list
     end
 end

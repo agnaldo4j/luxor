@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListClientUserUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.ClientUser.ListClientUserCommand{}) do
+    defp execute(_command = %Command.ClientUser.ListClientUserCommand{}) do
         Persistence.Luxor.ClientUserPersistenceAdapterApi.list
     end
 end

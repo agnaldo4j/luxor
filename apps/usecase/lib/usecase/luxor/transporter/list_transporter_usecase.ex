@@ -10,7 +10,7 @@ defmodule Usecase.Luxor.ListTransporterUsecase do
         {:reply, result, actual_state}
     end
 
-    defp execute(command = %Command.Transporter.ListTransporterCommand{}) do
+    defp execute(_command = %Command.Transporter.ListTransporterCommand{}) do
         Persistence.Luxor.TransporterPersistenceAdapterApi.list
     end
 end

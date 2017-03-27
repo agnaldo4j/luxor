@@ -17,9 +17,9 @@ defmodule AppRouter do
 
   get "/anyway", private: @skip_token_verification do
     _my_token = %{
-        exp: current_time + (2 * 60 * 60),
-        iat: current_time,
-        nbf: current_time - 1,
+        exp: current_time() + (2 * 60 * 60),
+        iat: current_time(),
+        nbf: current_time() - 1,
         iss: "Joken Showcase Server",
         aud: "RESTCLIENT",
         jti: "AAAAAAAAAA",
@@ -39,12 +39,6 @@ defmodule AppRouter do
 
   forward "/users", to: UserRouter, private: @skip_token_verification
 
-  forward "/github", to: GithubRouter, private: @skip_token_verification
-
-  forward "/trello", to: TrelloRouter, private: @skip_token_verification
-
-  forward "/bitbucket", to: BitbucketRouter, private: @skip_token_verification
-
   match _, private: @skip_token_verification do
     send_resp(conn, 404, "app oops")
   end
@@ -57,9 +51,9 @@ defmodule AppRouter do
     |> with_nbf
     |> with_iss("Joken Showcase Server")
     |> with_aud("RESTCLIENT")
-    |> with_validation("exp", &(&1 > current_time))
-    |> with_validation("iat", &(&1 < current_time))
-    |> with_validation("nbf", &(&1 < current_time))
+    |> with_validation("exp", &(&1 > current_time()))
+    |> with_validation("iat", &(&1 < current_time()))
+    |> with_validation("nbf", &(&1 < current_time()))
     |> with_validation("iss", &(&1 == "Joken Showcase Server"))
     |> with_validation("aud", &(&1 == "RESTCLIENT"))
     |> with_validation("user_id", &(&1 == 1))
