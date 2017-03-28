@@ -44,6 +44,13 @@ defmodule RelationalAdapter.Luxor.UserPersistenceAdapter do
         response(actual_state)
     end
 
+    def handle_call({:find_by_email_and_password, user}, _from, actual_state) do
+      user |>
+      RelationalAdapter.Luxor.UserRepository.find_by_email_and_password |>
+      RelationalAdapter.Luxor.User.to_business |>
+      response(actual_state)
+    end
+
     defp response(manager, actual_state) do
         {:reply, manager, actual_state}
     end

@@ -38,6 +38,10 @@ defmodule RelationalAdapter.Luxor.User do
         }
     end
 
+    def to_business(nil) do
+        nil
+    end
+
     defp build_params(domain) do
         %{
             id: domain.id,

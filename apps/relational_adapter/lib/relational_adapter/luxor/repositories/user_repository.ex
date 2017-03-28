@@ -17,6 +17,10 @@ defmodule RelationalAdapter.Luxor.UserRepository do
       RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.User, id)
     end
 
+    def find_by_email_and_password(user) do
+        RelationalAdapter.Luxor.Repository.get_by(RelationalAdapter.Luxor.User, [email: user.email, password: user.password])
+    end
+
     def get_all do
         query = from w in RelationalAdapter.Luxor.User, select: w
         RelationalAdapter.Luxor.Repository.all(query)

@@ -11,10 +11,40 @@ defmodule Usecase.UserTest do
         result = Usecase.Luxor.UserUsecaseApi.save(
             %Command.User.SaveUserCommand{
                 email: "teste@teste.com",
-                password: "01aa01",
+                password: UUID.uuid4(),
                 active: true
             }
         )
         assert result.email == "teste@teste.com"
+    end
+
+    @tag :UserTest
+    test "authentication user by persistence adapter" do
+        saved_user = Usecase.Luxor.UserUsecaseApi.save(
+            %Command.User.SaveUserCommand{
+                email: "teste@teste.com",
+                password: UUID.uuid4(),
+                active: true
+            }
+        )
+
+        result = Usecase.Luxor.UserUsecaseApi.authenticate(
+            %Command.User.AuthenticationUserCommand{
+                email: "teste@teste.com",
+                password: saved_user.password
+            }
+        )
+        assert result.email == "teste@teste.com"
+    end
+
+    @tag :UserTest
+    test "authentication user not found by persistence adapter" do
+        result = Usecase.Luxor.UserUsecaseApi.authenticate(
+            %Command.User.AuthenticationUserCommand{
+                email: "teste@teste.com",
+                password: UUID.uuid4()
+            }
+        )
+        assert result == nil
     end
 end
