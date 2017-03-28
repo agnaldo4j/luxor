@@ -1,4 +1,4 @@
-defmodule UserRouter do
+defmodule ClientRouter do
     use Plug.Router
 
     import Joken
@@ -9,11 +9,15 @@ defmodule UserRouter do
     plug Joken.Plug, verify: &TokenVerification.verify/0, on_error: &TokenVerification.error_logging/2
     plug :dispatch
 
-    post "/v1/auth/login" do
-        send_resp(conn, 200, "user world")
+    get "/", private: @skip_token_verification do
+        send_resp(conn, 200, "client world")
+    end
+
+    get "/teste" do
+        send_resp(conn, 200, "client world")
     end
 
     match _ do
-        send_resp(conn, 404, "user oops")
+        send_resp(conn, 404, "client oops")
     end
 end
