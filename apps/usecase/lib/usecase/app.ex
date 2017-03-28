@@ -5,6 +5,7 @@ defmodule Usecase.App do
         import Supervisor.Spec
         tree = [
             worker(Usecase.Luxor.AddUserUsecase, [[], [name: :add_user_usecase]]),
+            worker(Usecase.Luxor.AuthenticationUserUsecase, [[], [name: :authentication_user_usecase]]),
 
             worker(Usecase.Luxor.SaveClientUserUsecase, [[], [name: :save_client_user_usecase]]),
             worker(Usecase.Luxor.UpdateClientUserUsecase, [[], [name: :update_client_user_usecase]]),
