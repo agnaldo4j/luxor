@@ -1,14 +1,10 @@
 defmodule Persistence.Luxor.UserPersistenceAdapterApi do
-    def get_all_users do
-        GenServer.call(:user_persistence_adapter, :get_all_users)
-    end
-
     def save(user = %Luxor.User{}) do
-        GenServer.call(:user_persistence_adapter, {:save_user, user})
+        GenServer.call(:user_persistence_adapter, {:save, user}, 15000)
     end
 
-    def find_by_id(id) do
-        GenServer.call(:user_persistence_adapter, {:find_user_by_id, id})
+    def find_by_email_and_password(email, password) do
+        GenServer.call(:user_persistence_adapter, {:find_by_email_and_password, {email, password}})
     end
 
 end

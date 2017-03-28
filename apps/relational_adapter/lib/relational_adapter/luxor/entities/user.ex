@@ -19,6 +19,10 @@ defmodule RelationalAdapter.Luxor.User do
         |> unique_constraint(:email)
     end
 
+    def change_state_to(actual_state = %RelationalAdapter.Luxor.User{}, domain = %Luxor.User{}) do
+      changeset(actual_state, update_build_params(actual_state, domain))
+    end
+
     def from_business(domain = %Luxor.User{}) do
         changeset(%RelationalAdapter.Luxor.User{}, build_params(domain))
     end
@@ -39,6 +43,17 @@ defmodule RelationalAdapter.Luxor.User do
             id: domain.id,
             created: domain.created,
             updated: domain.updated,
+            email: domain.email,
+            password: domain.password,
+            active: domain.active
+        }
+    end
+
+    defp update_build_params(actual_state, domain) do
+        %{
+            id: actual_state.id,
+            created: actual_state.created,
+            updated: DateTime.today,
             email: domain.email,
             password: domain.password,
             active: domain.active

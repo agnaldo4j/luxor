@@ -6,29 +6,49 @@ defmodule RelationalAdapter.Luxor.UserPersistenceAdapter do
         GenServer.start_link(RelationalAdapter.Luxor.UserPersistenceAdapter, state, opts)
     end
 
-    def handle_call(:get_all_repos, _from, actual_state) do
-        result = RelationalAdapter.Luxor.UserRepository.keyword_query()
+    def handle_call({:save, manager}, _from, actual_state) do
+        manager |>
+        RelationalAdapter.Luxor.User.from_business |>
+        RelationalAdapter.Luxor.UserRepository.save |>
+        RelationalAdapter.Luxor.User.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:delete, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.UserRepository.get |>
+        RelationalAdapter.Luxor.UserRepository.delete |>
+        RelationalAdapter.Luxor.User.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:update, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.UserRepository.get |>
+        RelationalAdapter.Luxor.User.change_state_to(manager) |>
+        RelationalAdapter.Luxor.UserRepository.update |>
+        RelationalAdapter.Luxor.User.to_business |>
+        response(actual_state)
+    end
+
+    def handle_call({:list}, _from, actual_state) do
+        result = RelationalAdapter.Luxor.UserRepository.get_all()
         external_list = Enum.map(result, list_to_domain())
         {:reply, external_list, actual_state}
     end
 
-    def handle_call({:find_user_by_id, user_id}, _from, actual_state) do
-        {:reply, %Luxor.User{id: user_id}, actual_state}
-    end
-
-    def handle_call({:save_user, user}, _from, actual_state) do
-        user |>
-        RelationalAdapter.Luxor.User.from_business |>
-        RelationalAdapter.Luxor.UserRepository.save |>
+    def handle_call({:get, manager}, _from, actual_state) do
+        manager.id |>
+        RelationalAdapter.Luxor.UserRepository.get |>
         RelationalAdapter.Luxor.User.to_business |>
-        save_user_response(actual_state)
+        response(actual_state)
     end
 
-    defp save_user_response(user, actual_state) do
-        {:reply, user, actual_state}
+    defp response(manager, actual_state) do
+        {:reply, manager, actual_state}
     end
 
     defp list_to_domain() do
-        fn(user) -> RelationalAdapter.Luxor.User.to_business(user) end
+        fn(manager) -> RelationalAdapter.Luxor.User.to_business(manager) end
     end
 end

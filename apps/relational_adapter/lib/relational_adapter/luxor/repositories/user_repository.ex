@@ -5,16 +5,19 @@ defmodule RelationalAdapter.Luxor.UserRepository do
         RelationalAdapter.Luxor.Repository.insert!(changeset)
     end
 
-    def delete(changeset = %RelationalAdapter.Luxor.User{}) do
+    def update(changeset) do
+        RelationalAdapter.Luxor.Repository.update!(changeset)
+    end
+
+    def delete(changeset) do
       RelationalAdapter.Luxor.Repository.delete!(changeset)
     end
 
-    def delete(changeset = %RelationalAdapter.Luxor.ClientUser{}) do
-      RelationalAdapter.Luxor.Repository.delete!(changeset.user)
-      changeset
+    def get(id) do
+      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.User, id)
     end
 
-    def keyword_query do
+    def get_all do
         query = from w in RelationalAdapter.Luxor.User, select: w
         RelationalAdapter.Luxor.Repository.all(query)
     end
