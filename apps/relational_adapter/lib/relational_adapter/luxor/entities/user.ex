@@ -38,8 +38,22 @@ defmodule RelationalAdapter.Luxor.User do
         }
     end
 
-    def to_business(nil) do
-        nil
+    def to_business({:ok, user}) do
+        {
+            :ok,
+            %Luxor.User{
+                id: user.id,
+                created: user.created,
+                updated: user.updated,
+                email: user.email,
+                password: user.password,
+                active: user.active
+            }
+        }
+    end
+
+    def to_business({:error, errors}) do
+        {:error, errors}
     end
 
     defp build_params(domain) do

@@ -15,12 +15,26 @@ defmodule Usecase.UserTest do
                 active: true
             }
         )
-        assert result.email == "teste@teste.com"
+        {:ok, user} = result
+        assert user.email == "teste@teste.com"
+    end
+
+    @tag :UserTest
+    test "wrong parameter when save new user by persistence adapter" do
+        result = Usecase.Luxor.UserUsecaseApi.save(
+            %Command.User.SaveUserCommand{
+                email: "teste@teste.com",
+                active: true
+            }
+        )
+        {:error, errors} = result
+        IO.inspect(errors)
+        assert errors == [password: {"can't be blank", []}]
     end
 
     @tag :UserTest
     test "authentication user by persistence adapter" do
-        saved_user = Usecase.Luxor.UserUsecaseApi.save(
+        {:ok, user} = Usecase.Luxor.UserUsecaseApi.save(
             %Command.User.SaveUserCommand{
                 email: "teste@teste.com",
                 password: UUID.uuid4(),
@@ -31,10 +45,11 @@ defmodule Usecase.UserTest do
         result = Usecase.Luxor.UserUsecaseApi.authenticate(
             %Command.User.AuthenticationUserCommand{
                 email: "teste@teste.com",
-                password: saved_user.password
+                password: user.password
             }
         )
-        assert result.email == "teste@teste.com"
+        {:ok, user} = result
+        assert user.email == "teste@teste.com"
     end
 
     @tag :UserTest
@@ -45,6 +60,7 @@ defmodule Usecase.UserTest do
                 password: UUID.uuid4()
             }
         )
-        assert result == nil
+        {:error, errors} = result
+        assert errors == [password: {"maybe can be Wrong", []}, email: {"maybe can be Wrong", []}]
     end
 end
