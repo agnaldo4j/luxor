@@ -27,17 +27,6 @@ defmodule RelationalAdapter.Luxor.User do
         changeset(%RelationalAdapter.Luxor.User{}, build_params(domain))
     end
 
-    def to_business(user = %RelationalAdapter.Luxor.User{}) do
-        %Luxor.User{
-            id: user.id,
-            created: user.created,
-            updated: user.updated,
-            email: user.email,
-            password: user.password,
-            active: user.active
-        }
-    end
-
     def to_business({:ok, user}) do
         {
             :ok,

@@ -9,15 +9,22 @@ defmodule RelationalAdapter.Luxor.UserRepository do
     end
 
     def update(changeset) do
-        RelationalAdapter.Luxor.Repository.update(changeset)
+        case RelationalAdapter.Luxor.Repository.update(changeset) do
+            {:error, changeset} -> {:error, changeset.errors}
+            {:ok, struct} -> {:ok, struct}
+        end
     end
 
     def delete(changeset) do
-      RelationalAdapter.Luxor.Repository.delete(changeset)
+      case RelationalAdapter.Luxor.Repository.delete(changeset) do
+          {:error, changeset} -> {:error, changeset.errors}
+          {:ok, struct} -> {:ok, struct}
+      end
     end
 
     def get(id) do
       RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.User, id)
+      |> build_optional_result([id: {"not found", []}])
     end
 
     def find_by_email_and_password(user) do
