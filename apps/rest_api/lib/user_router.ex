@@ -9,9 +9,7 @@ defmodule UserRouter do
     plug Joken.Plug, verify: &TokenVerification.verify/0, on_error: &TokenVerification.error_logging/2
     plug :dispatch
 
-    post "/v1/auth/login" do
-        send_resp(conn, 200, "user world")
-    end
+
 
     match _ do
         send_resp(conn, 404, "user oops")

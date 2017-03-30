@@ -17,8 +17,16 @@ defmodule AppRouter do
         send_resp(conn, 200, my_token)
     end
 
-    forward "/v1/auth/users", to: UserRouter
-    forward "/v1/auth/clients", to: ClientRouter
+    get "/v1/auth/login" do
+        result = Plug.Conn.fetch_query_params(conn)
+        |> Command.User.AuthenticationUserCommand.new_from
+        |> Usecase.Luxor.UserUsecaseApi.authenticate
+
+        send_resp(conn, 200, "deu certo")
+    end
+
+    forward "/v1/users", to: UserRouter
+    forward "/v1/clients", to: ClientRouter
 
     match _ do
         send_resp(conn, 404, "app oops")
