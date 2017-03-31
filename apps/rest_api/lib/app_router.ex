@@ -18,19 +18,10 @@ defmodule AppRouter do
     end
 
     get "/v1/auth/login" do
-        result = Plug.Conn.fetch_query_params(conn)
+        Plug.Conn.fetch_query_params(conn)
         |> Command.User.AuthenticationUserCommand.new_from
         |> Usecase.Luxor.UserUsecaseApi.authenticate
-
-        case result do
-          {:error, errors} ->
-            {_, json} = Poison.encode(%{code: 401, message: "Invalid email or password"})
-            send_resp(conn, 401, json)
-          {:ok, user} ->
-            {_, json} = Poison.encode(user)
-            send_resp(conn, 200, json)
-        end
-
+        |> RestApi.Luxor.Responder.login_response
     end
 
     forward "/v1/users", to: UserRouter
