@@ -21,6 +21,7 @@ defmodule RestApi.Mixfile do
     [
         applications: [
             :logger,
+            :corsica,
             :cowboy,
             :plug,
             :relx,
@@ -52,6 +53,7 @@ defmodule RestApi.Mixfile do
         #{:relx, github: "erlware/relx", override: true},
         {:cowboy, "~> 1.1"},
         {:plug, "~> 1.3"},
+        {:corsica, "~> 0.5"},
         {:joken, "~> 1.4"},
         {:exrm, "~> 1.0.8"},
         {:relx, github: "erlware/relx", override: true}, # <-- depends on erlware_commons-0.18.0
