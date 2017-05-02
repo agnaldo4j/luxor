@@ -9,4 +9,3 @@ erl_crash.dump
 *.iml
 *.lock
 **/.fetch
-/deps/*
