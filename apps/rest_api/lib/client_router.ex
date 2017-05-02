@@ -13,7 +13,7 @@ defmodule ClientRouter do
         send_resp(conn, 200, "client world")
     end
 
-    get "/teste" do
+    post "/teste"  do
         send_resp(conn, 200, "client world")
     end
 

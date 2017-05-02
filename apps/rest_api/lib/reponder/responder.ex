@@ -13,15 +13,16 @@ defmodule Luxor.RestApi.Responder do
         end
     end
 
-    defp prepare_response_with_token(status_code, data, token) do
-      #"{\"header\":{\"time\":"+new Date().getTime+",\"httpStatus\":"+status.code+"},\"body\":\""+message+"\"}"
+    def logout_response(conn) do
+         Plug.Conn.send_resp(conn, 200, prepare_response_without_token(200, "logout success"))
+    end
 
+    defp prepare_response_with_token(status_code, data, token) do
       {_, json} = Poison.encode(%{header: %{time: DateTime.now, httpStatus: status_code, token: token}, body: data})
       json
     end
 
     defp prepare_response_without_token(status_code, data) do
-      #"{\"header\":{\"time\":"+new Date().getTime+",\"httpStatus\":"+status.code+"},\"body\":\""+message+"\"}"
       {_, json} = Poison.encode(%{header: %{time: DateTime.now, httpStatus: status_code}, body: data})
       json
     end

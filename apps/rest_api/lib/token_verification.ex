@@ -3,7 +3,7 @@ defmodule TokenVerification do
 
     def generate_token do
         %{
-            exp: current_time() + (2 * 60 * 60),
+            exp: current_time() + (2 * 60),
             iat: current_time(),
             nbf: current_time() - 1,
             iss: "Joken Showcase Server",
