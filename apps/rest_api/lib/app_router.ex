@@ -25,12 +25,12 @@ defmodule AppRouter do
         send_resp(conn, 200, my_token)
     end
 
-    post "/v1/auth/login", allow_credentials: false do
+    post "/v1/auth/login", allow_credentials: true do
         conn
         |> my_parse
         |> Command.User.AuthenticationUserCommand.new_from
         |> Usecase.Luxor.UserUsecaseApi.authenticate
-        |> login_response(conn)
+        |> Luxor.RestApi.Responder.login_response(conn)
     end
 
     forward "/v1/users", to: UserRouter
@@ -38,17 +38,6 @@ defmodule AppRouter do
 
     match _ do
         send_resp(conn, 404, "app oops")
-    end
-
-    def login_response(result, conn) do
-        case result do
-          {:error, _errors} ->
-            {_, json} = Poison.encode(%{code: 401, message: "Invalid email or password"})
-            send_resp(conn, 401, json)
-          {:ok, user} ->
-            {_, json} = Poison.encode(user)
-            send_resp(conn, 200, json)
-        end
     end
 
     def my_parse(conn) do
