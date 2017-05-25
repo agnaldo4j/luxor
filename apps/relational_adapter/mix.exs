@@ -57,7 +57,7 @@ defmodule RelationalAdapter.Mixfile do
         {:ecto, "~> 2.0.6"},
         {:timex, "~> 2.1"},
         {:timex_ecto, "~> 1.1"},
-        { :uuid, "~> 1.1" },
+        {:uuid, "~> 1.1"},
         {:adapter, in_umbrella: true}
     ]
   end

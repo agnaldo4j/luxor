@@ -12,7 +12,7 @@ defmodule Command.User.AuthenticationUserCommand do
     }
 
     def new_from(conn) do
-      %{ "email" => email, "password" => password } = conn.params
-      %Command.User.AuthenticationUserCommand{ email: email, password: password }
+      %{"email" => email, "password" => password} = conn.params
+      %Command.User.AuthenticationUserCommand{email: email, password: password}
     end
 end

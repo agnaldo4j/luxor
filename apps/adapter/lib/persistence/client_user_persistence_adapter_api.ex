@@ -20,5 +20,4 @@ defmodule Persistence.Luxor.ClientUserPersistenceAdapterApi do
     def get(client_user = %Luxor.ClientUser{}) do
         GenServer.call(:client_user_persistence_adapter, {:get, client_user}, 15_000)
     end
-
 end
