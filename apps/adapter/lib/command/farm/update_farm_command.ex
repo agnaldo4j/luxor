@@ -1,4 +1,6 @@
 defmodule Command.Farm.UpdateFarmCommand do
+    @moduledoc ""
+
 
     defstruct [
         :id,

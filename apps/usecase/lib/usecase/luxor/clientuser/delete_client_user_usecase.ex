@@ -1,4 +1,6 @@
 defmodule Usecase.Luxor.DeleteClientUserUsecase do
+    @moduledoc ""
+
     use GenServer
 
     def start_link(state, opts \\ []) do

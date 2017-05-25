@@ -1,4 +1,6 @@
 defmodule Command.Manager.SaveManagerCommand do
+    @moduledoc ""
+
     defstruct [
         :name
     ]

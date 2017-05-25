@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.UserRepository do
+    @moduledoc ""
+
     import Ecto.Query
 
     def save(changeset) do
@@ -23,12 +25,14 @@ defmodule RelationalAdapter.Luxor.UserRepository do
     end
 
     def get(id) do
-      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.User, id)
-      |> build_optional_result([id: {"not found", []}])
+        RelationalAdapter.Luxor.User
+        |> RelationalAdapter.Luxor.Repository.get!(id)
+        |> build_optional_result([id: {"not found", []}])
     end
 
     def find_by_email_and_password(user) do
-        RelationalAdapter.Luxor.Repository.get_by(RelationalAdapter.Luxor.User, [email: user.email, password: user.password])
+        RelationalAdapter.Luxor.User
+        |> RelationalAdapter.Luxor.Repository.get_by([email: user.email, password: user.password])
         |> build_optional_result([password: {"maybe can be Wrong", []}, email: {"maybe can be Wrong", []}])
     end
 

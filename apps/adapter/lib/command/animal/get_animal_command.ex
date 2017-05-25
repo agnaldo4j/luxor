@@ -1,4 +1,6 @@
 defmodule Command.Animal.GetAnimalCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

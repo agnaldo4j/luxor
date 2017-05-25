@@ -1,4 +1,6 @@
 defmodule Usecase.Luxor.UpdateAnimalUsecase do
+    @moduledoc ""
+
     use GenServer
     use Timex
 
@@ -12,14 +14,15 @@ defmodule Usecase.Luxor.UpdateAnimalUsecase do
     end
 
     defp execute(command = %Command.Animal.UpdateAnimalCommand{}) do
-        get_producer(command.producer_id) |>
-        build_animal_with(command) |>
-        Persistence.Luxor.AnimalPersistenceAdapterApi.update
+        command.producer_id
+        |> get_producer
+        |> build_animal_with(command)
+        |> Persistence.Luxor.AnimalPersistenceAdapterApi.update
     end
 
     defp get_producer(producer_id) do
-        %Luxor.Producer{id: producer_id} |>
-        Persistence.Luxor.ProducerPersistenceAdapterApi.get
+        %Luxor.Producer{id: producer_id}
+        |> Persistence.Luxor.ProducerPersistenceAdapterApi.get
     end
 
     defp build_animal_with(producer, command) do

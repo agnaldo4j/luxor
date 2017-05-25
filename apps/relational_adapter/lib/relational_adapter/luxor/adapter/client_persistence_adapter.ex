@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.ClientPersistenceAdapter do
+    @moduledoc ""
+
     use Timex
     use GenServer
 
@@ -17,11 +19,11 @@ defmodule RelationalAdapter.Luxor.ClientPersistenceAdapter do
     end
 
     def handle_call({:save, client}, _from, actual_state) do
-        client |>
-        RelationalAdapter.Luxor.Client.from_business |>
-        RelationalAdapter.Luxor.ClientRepository.save |>
-        RelationalAdapter.Luxor.Client.to_business |>
-        save_client_response(actual_state)
+        client
+        |> RelationalAdapter.Luxor.Client.from_business
+        |> RelationalAdapter.Luxor.ClientRepository.save
+        |> RelationalAdapter.Luxor.Client.to_business
+        |> save_client_response(actual_state)
     end
 
     defp save_client_response(client, actual_state) do

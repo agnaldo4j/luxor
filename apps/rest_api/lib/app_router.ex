@@ -1,4 +1,6 @@
 defmodule AppRouter do
+    @moduledoc ""
+
     use Plug.Router
 
     plug :match

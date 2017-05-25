@@ -1,4 +1,6 @@
 defmodule Usecase.Luxor.UpdateTruckUsecase do
+    @moduledoc ""
+
     use GenServer
     use Timex
 

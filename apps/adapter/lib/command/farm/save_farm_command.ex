@@ -1,4 +1,6 @@
 defmodule Command.Farm.SaveFarmCommand do
+    @moduledoc ""
+
     defstruct [
         :name
     ]

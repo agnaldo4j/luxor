@@ -1,4 +1,6 @@
 defmodule Luxor.Truck do
+    @moduledoc ""
+
     @derive [Poison.Encoder]
     use Timex
 

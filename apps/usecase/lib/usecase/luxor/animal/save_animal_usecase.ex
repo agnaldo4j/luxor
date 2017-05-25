@@ -1,4 +1,6 @@
 defmodule Usecase.Luxor.SaveAnimalUsecase do
+    @moduledoc ""
+
     use GenServer
 
     def start_link(state, opts \\ []) do
@@ -11,10 +13,11 @@ defmodule Usecase.Luxor.SaveAnimalUsecase do
     end
 
     defp execute(command = %Command.Animal.SaveAnimalCommand{}) do
-        get_producer(command.producer_id) |>
-        build_animal_with(command) |>
-        Luxor.Animal.identify |>
-        Persistence.Luxor.AnimalPersistenceAdapterApi.save
+        command.producer_id
+        |> get_producer
+        |> build_animal_with(command)
+        |> Luxor.Animal.identify
+        |> Persistence.Luxor.AnimalPersistenceAdapterApi.save
 
     end
 

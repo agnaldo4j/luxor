@@ -1,4 +1,6 @@
 defmodule Command.Device.GetDeviceCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

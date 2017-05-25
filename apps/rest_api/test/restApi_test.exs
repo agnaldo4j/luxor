@@ -1,4 +1,6 @@
 defmodule RestApiTest do
+    @moduledoc ""
+
   use ExUnit.Case
   doctest RestApi
 

@@ -1,5 +1,5 @@
 defmodule LoginRouter do
-    @moduledoc false
+    @moduledoc ""
 
     use Plug.Router
 

@@ -1,4 +1,6 @@
 defmodule Command.Analysis.SaveAnalysisCommand do
+    @moduledoc ""
+
     defstruct [
         :name
     ]

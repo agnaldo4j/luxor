@@ -1,4 +1,6 @@
 defmodule Command.Device.DeleteDeviceCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

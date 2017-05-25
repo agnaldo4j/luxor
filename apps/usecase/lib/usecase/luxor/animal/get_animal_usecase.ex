@@ -1,4 +1,6 @@
 defmodule Usecase.Luxor.GetAnimalUsecase do
+    @moduledoc ""
+
     use GenServer
 
     def start_link(state, opts \\ []) do

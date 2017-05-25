@@ -1,4 +1,6 @@
 defmodule Command.Producer.UpdateProducerCommand do
+    @moduledoc ""
+
 
     defstruct [
         :id,

@@ -1,4 +1,6 @@
 defmodule Command.Device.SaveDeviceCommand do
+    @moduledoc ""
+
     defstruct [
         :serial_number,
         :name

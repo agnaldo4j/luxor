@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.TruckRepository do
+    @moduledoc ""
+
     import Ecto.Query
 
     def save(changeset) do

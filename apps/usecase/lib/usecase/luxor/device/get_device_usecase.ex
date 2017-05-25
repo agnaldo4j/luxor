@@ -1,4 +1,6 @@
 defmodule Usecase.Luxor.GetDeviceUsecase do
+    @moduledoc ""
+
     use GenServer
 
     def start_link(state, opts \\ []) do

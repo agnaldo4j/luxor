@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.Manager do
+    @moduledoc ""
+
     use RelationalAdapter.Luxor.Model
     use Timex
     import Ecto.Changeset

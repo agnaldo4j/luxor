@@ -1,4 +1,6 @@
 defmodule Command.Producer.DeleteProducerCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

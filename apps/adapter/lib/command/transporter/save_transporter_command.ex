@@ -1,4 +1,6 @@
 defmodule Command.Transporter.SaveTransporterCommand do
+    @moduledoc ""
+
     defstruct [
         :name
     ]

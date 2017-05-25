@@ -28,7 +28,6 @@ defmodule Usecase.UserTest do
             }
         )
         {:error, errors} = result
-        IO.inspect(errors)
         assert errors == [password: {"can't be blank", []}]
     end
 

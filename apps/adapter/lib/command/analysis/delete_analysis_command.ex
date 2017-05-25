@@ -1,4 +1,6 @@
 defmodule Command.Analysis.DeleteAnalysisCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

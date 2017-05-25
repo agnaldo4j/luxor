@@ -1,4 +1,6 @@
 defmodule Usecase.Luxor.SaveTransporterUsecase do
+    @moduledoc ""
+
     use GenServer
 
     def start_link(state, opts \\ []) do

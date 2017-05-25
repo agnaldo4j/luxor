@@ -1,4 +1,6 @@
 defmodule TokenVerification do
+    @moduledoc ""
+
     import Joken
 
     def generate_token do

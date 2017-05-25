@@ -1,4 +1,6 @@
 defmodule Command.Truck.SaveTruckCommand do
+    @moduledoc ""
+
     defstruct [
         :name
     ]

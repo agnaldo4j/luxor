@@ -1,4 +1,6 @@
 defmodule Command.User.AuthenticationUserCommand do
+    @moduledoc ""
+
     defstruct [
         :email,
         :password

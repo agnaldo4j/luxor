@@ -1,4 +1,6 @@
 defmodule Command.Animal.DeleteAnimalCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

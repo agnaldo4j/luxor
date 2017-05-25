@@ -1,4 +1,6 @@
 defmodule Persistence.Luxor.ClientPersistenceAdapterApi do
+    @moduledoc ""
+
     def list do
         GenServer.call(:client_persistence_adapter, :list)
     end

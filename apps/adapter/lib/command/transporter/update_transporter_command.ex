@@ -1,4 +1,6 @@
 defmodule Command.Transporter.UpdateTransporterCommand do
+    @moduledoc ""
+
 
     defstruct [
         :id,

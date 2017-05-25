@@ -1,4 +1,6 @@
 defmodule Command.Manager.DeleteManagerCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

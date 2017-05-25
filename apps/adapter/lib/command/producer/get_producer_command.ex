@@ -1,4 +1,6 @@
 defmodule Command.Producer.GetProducerCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

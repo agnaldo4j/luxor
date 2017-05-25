@@ -1,4 +1,6 @@
 defmodule Command.Animal.SaveAnimalCommand do
+    @moduledoc ""
+
     defstruct [
         :register_number,
         :breed,

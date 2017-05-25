@@ -2,10 +2,13 @@ defmodule Profitability.Mixfile do
   use Mix.Project
 
   def project do
-    [apps_path: "apps",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+        test_coverage: [tool: Coverex.Task, coveralls: true],
+        apps_path: "apps",
+        build_embedded: Mix.env == :prod,
+        start_permanent: Mix.env == :prod,
+        deps: deps()
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -21,6 +24,10 @@ defmodule Profitability.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    []
+    [
+        {:credo, "~> 0.7", only: [:dev, :test]},
+        {:inch_ex, "~> 0.5", only: [:dev, :test]},
+        {:coverex, "~> 1.4.12", only: :test}
+    ]
   end
 end

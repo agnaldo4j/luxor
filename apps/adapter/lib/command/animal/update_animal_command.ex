@@ -1,4 +1,6 @@
 defmodule Command.Animal.UpdateAnimalCommand do
+    @moduledoc ""
+
 
     defstruct [
         :id,

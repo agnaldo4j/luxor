@@ -1,4 +1,6 @@
 defmodule Command.ClientUser.GetClientUserCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

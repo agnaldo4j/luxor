@@ -1,4 +1,6 @@
 defmodule Command.Farm.DeleteFarmCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

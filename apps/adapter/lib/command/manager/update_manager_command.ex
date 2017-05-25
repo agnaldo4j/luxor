@@ -1,4 +1,6 @@
 defmodule Command.Manager.UpdateManagerCommand do
+    @moduledoc ""
+
 
     defstruct [
         :id,

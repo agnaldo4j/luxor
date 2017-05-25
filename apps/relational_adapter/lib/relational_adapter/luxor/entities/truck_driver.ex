@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.TruckDriver do
+    @moduledoc ""
+
     use RelationalAdapter.Luxor.Model
     use Timex
     import Ecto.Changeset
@@ -9,8 +11,8 @@ defmodule RelationalAdapter.Luxor.TruckDriver do
         field :name, :string
     end
 
-    def changeset(truckDriver, params \\ %{}) do
-        truckDriver
+    def changeset(truck_driver, params \\ %{}) do
+        truck_driver
         |> cast(params, [:id, :created, :updated, :name])
         |> validate_required([:id, :created, :updated, :name])
     end
@@ -23,12 +25,12 @@ defmodule RelationalAdapter.Luxor.TruckDriver do
         changeset(%RelationalAdapter.Luxor.TruckDriver{}, build_params(domain))
     end
 
-    def to_business(truckDriver = %RelationalAdapter.Luxor.TruckDriver{}) do
+    def to_business(truck_driver = %RelationalAdapter.Luxor.TruckDriver{}) do
         %Luxor.TruckDriver{
-            id: truckDriver.id,
-            created: truckDriver.created,
-            updated: truckDriver.updated,
-            name: truckDriver.name
+            id: truck_driver.id,
+            created: truck_driver.created,
+            updated: truck_driver.updated,
+            name: truck_driver.name
         }
     end
 

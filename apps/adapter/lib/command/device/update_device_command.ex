@@ -1,4 +1,6 @@
 defmodule Command.Device.UpdateDeviceCommand do
+    @moduledoc ""
+
 
     defstruct [
         :id,

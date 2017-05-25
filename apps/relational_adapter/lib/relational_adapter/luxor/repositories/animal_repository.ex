@@ -1,24 +1,30 @@
 defmodule RelationalAdapter.Luxor.AnimalRepository do
+    @moduledoc ""
+
     import Ecto.Query
 
     def save(changeset) do
-        RelationalAdapter.Luxor.Repository.insert!(changeset) |>
-        load_deps
+        changeset
+        |> RelationalAdapter.Luxor.Repository.insert!
+        |> load_deps
     end
 
     def update(changeset) do
-        RelationalAdapter.Luxor.Repository.update!(changeset) |>
-        load_deps
+        changeset
+        |> RelationalAdapter.Luxor.Repository.update!
+        |> load_deps
     end
 
     def delete(changeset) do
-      RelationalAdapter.Luxor.Repository.delete!(changeset) |>
-      load_deps
+        changeset
+        |> RelationalAdapter.Luxor.Repository.delete!
+        |> load_deps
     end
 
     def get(id) do
-      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.Animal, id) |>
-      load_deps
+        RelationalAdapter.Luxor.Animal
+        |> RelationalAdapter.Luxor.Repository.get!(id)
+        |> load_deps
     end
 
     def get_all do
@@ -27,7 +33,7 @@ defmodule RelationalAdapter.Luxor.AnimalRepository do
     end
 
     defp load_deps(changeset = %RelationalAdapter.Luxor.Animal{}) do
-        changeset |>
-        RelationalAdapter.Luxor.Repository.preload(:producer)
+        changeset
+        |> RelationalAdapter.Luxor.Repository.preload(:producer)
     end
 end

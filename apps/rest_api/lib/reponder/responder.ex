@@ -1,5 +1,5 @@
 defmodule Luxor.RestApi.Responder do
-    @moduledoc false
+    @moduledoc ""
 
     use Timex
 

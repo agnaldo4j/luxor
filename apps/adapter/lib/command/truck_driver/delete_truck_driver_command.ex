@@ -1,4 +1,6 @@
 defmodule Command.TruckDriver.DeleteTruckDriverCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

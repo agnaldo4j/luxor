@@ -1,4 +1,6 @@
 defmodule Command.Producer.SaveProducerCommand do
+    @moduledoc ""
+
     defstruct [
         :name,
         :sex,

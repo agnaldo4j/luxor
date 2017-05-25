@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.App do
+    @moduledoc ""
+
     use Application
 
     def start(_type, _args) do

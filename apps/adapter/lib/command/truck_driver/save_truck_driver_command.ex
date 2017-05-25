@@ -1,4 +1,6 @@
 defmodule Command.TruckDriver.SaveTruckDriverCommand do
+    @moduledoc ""
+
     defstruct [
         :name
     ]

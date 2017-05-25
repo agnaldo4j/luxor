@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
+    @moduledoc ""
+
     use Timex
     use GenServer
 
@@ -7,18 +9,21 @@ defmodule RelationalAdapter.Luxor.ClientUserPersistenceAdapter do
     end
 
     def handle_call({:save, client_user}, _from, actual_state) do
-        execute_transaction(client_user) |>
-        result_transaction(actual_state)
+        client_user
+        |> execute_transaction
+        |> result_transaction(actual_state)
     end
 
     def handle_call({:update, client_user}, _from, actual_state) do
-        execute_update_transaction(client_user) |>
-        result_transaction(actual_state)
+        client_user
+        |> execute_update_transaction
+        |> result_transaction(actual_state)
     end
 
     def handle_call({:delete, client_user}, _from, actual_state) do
-        execute_delete_transaction(client_user) |>
-        result_transaction(actual_state)
+        client_user
+        |> execute_delete_transaction
+        |> result_transaction(actual_state)
     end
 
     def handle_call({:list}, _from, actual_state) do

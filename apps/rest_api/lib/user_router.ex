@@ -1,4 +1,6 @@
 defmodule UserRouter do
+    @moduledoc ""
+
     use Plug.Router
 
     import Joken

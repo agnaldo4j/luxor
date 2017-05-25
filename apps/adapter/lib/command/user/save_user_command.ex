@@ -1,4 +1,6 @@
 defmodule Command.User.SaveUserCommand do
+    @moduledoc ""
+
     defstruct [
         :email,
         :password,

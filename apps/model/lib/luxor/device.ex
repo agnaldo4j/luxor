@@ -1,4 +1,6 @@
 defmodule Luxor.Device do
+    @moduledoc ""
+
     @derive [Poison.Encoder]
     use Timex
 

@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.ClientUserRepository do
+    @moduledoc ""
+
     import Ecto.Query
 
     def save(changeset) do
@@ -14,8 +16,9 @@ defmodule RelationalAdapter.Luxor.ClientUserRepository do
     end
 
     def get(id) do
-      RelationalAdapter.Luxor.Repository.get!(RelationalAdapter.Luxor.ClientUser, id) |>
-      load_deps
+        RelationalAdapter.Luxor.ClientUser
+        |> RelationalAdapter.Luxor.Repository.get!(id)
+        |> load_deps
     end
 
     def load_deps(changeset = %RelationalAdapter.Luxor.ClientUser{}) do

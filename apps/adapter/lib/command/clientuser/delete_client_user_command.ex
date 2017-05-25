@@ -1,4 +1,6 @@
 defmodule Command.ClientUser.DeleteClientUserCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

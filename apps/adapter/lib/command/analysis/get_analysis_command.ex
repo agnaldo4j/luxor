@@ -1,4 +1,6 @@
 defmodule Command.Analysis.GetAnalysisCommand do
+    @moduledoc ""
+
     defstruct [
         :id
     ]

@@ -1,4 +1,6 @@
 defmodule Command.ClientUser.UpdateClientUserCommand do
+    @moduledoc ""
+
     defstruct [
         :id,
         :name,

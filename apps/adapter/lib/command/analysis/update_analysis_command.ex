@@ -1,4 +1,5 @@
 defmodule Command.Analysis.UpdateAnalysisCommand do
+    @moduledoc ""
 
     defstruct [
         :id,

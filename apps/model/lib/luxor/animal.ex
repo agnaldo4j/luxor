@@ -1,4 +1,6 @@
 defmodule Luxor.Animal do
+    @moduledoc ""
+
     @derive [Poison.Encoder]
     use Timex
 

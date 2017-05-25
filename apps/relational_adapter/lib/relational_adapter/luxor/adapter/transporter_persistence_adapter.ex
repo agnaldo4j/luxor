@@ -1,4 +1,6 @@
 defmodule RelationalAdapter.Luxor.TransporterPersistenceAdapter do
+    @moduledoc ""
+
     use Timex
     use GenServer
 

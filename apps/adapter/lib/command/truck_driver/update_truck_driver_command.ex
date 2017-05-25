@@ -1,4 +1,6 @@
 defmodule Command.TruckDriver.UpdateTruckDriverCommand do
+    @moduledoc ""
+
 
     defstruct [
         :id,
