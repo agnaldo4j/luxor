@@ -51,7 +51,7 @@ defmodule Usecase.Mixfile do
         #{:relx, github: "erlware/relx", override: true},
         {:model, in_umbrella: true},
         {:adapter, in_umbrella: true},
-        {:timex, "~> 2.1"},
+        {:timex, "~> 3.2.1"},
         {:mochiweb, "~> 2.15", [override: true]},
         {:mochiweb_xpath, github: "retnuh/mochiweb_xpath", tag: "v1.2.0"}
     ]

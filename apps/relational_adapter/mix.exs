@@ -53,11 +53,11 @@ defmodule RelationalAdapter.Mixfile do
         #{:erlware_commons, github: "erlware/erlware_commons", override: true},
         #{:combine, github: "bitwalker/combine", override: true},
         #{:relx, github: "erlware/relx", override: true},
-        {:postgrex, "~> 0.12.0"},
-        {:ecto, "~> 2.0.6"},
-        {:timex, "~> 2.1"},
-        {:timex_ecto, "~> 1.1"},
-        {:uuid, "~> 1.1"},
+        {:postgrex, "~> 0.13.5"},
+        {:ecto, "~> 2.2.8"},
+        {:timex, "~> 3.2.1"},
+        {:timex_ecto, "~> 3.2.1"},
+        {:uuid, "~> 1.1.8"},
         {:adapter, in_umbrella: true}
     ]
   end

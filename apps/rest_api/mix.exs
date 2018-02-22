@@ -51,14 +51,11 @@ defmodule RestApi.Mixfile do
         #{:erlware_commons, github: "erlware/erlware_commons", override: true},
         #{:combine, github: "bitwalker/combine", override: true},
         #{:relx, github: "erlware/relx", override: true},
-        {:cowboy, "~> 1.1"},
-        {:plug, "~> 1.3"},
-        {:corsica, "~> 0.5"},
-        {:joken, "~> 1.4"},
-        {:exrm, "~> 1.0.8"},
-        {:relx, github: "erlware/relx", override: true}, # <-- depends on erlware_commons-0.18.0
-        {:cf, "~> 0.2.1", override: true}, # remove this later
-        {:erlware_commons, github: "erlware/erlware_commons", override: true}, # remove this later
+        {:cowboy, "~> 1.0.1"},
+        {:plug, "~> 1.4.5"},
+        {:corsica, "~> 1.1.1"},
+        {:joken, "~> 1.5.0"},
+        {:distillery, "~> 1.5", runtime: false},
         {:model, in_umbrella: true},
         {:adapter, in_umbrella: true}
     ]

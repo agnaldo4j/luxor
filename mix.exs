@@ -25,9 +25,9 @@ defmodule Profitability.Mixfile do
   # and cannot be accessed from applications inside the apps folder
   defp deps do
     [
-        {:credo, "~> 0.7.4", only: [:dev, :test]},
-        {:inch_ex, "~> 0.5", only: [:dev, :test]},
-        {:coverex, "~> 1.4.12", only: :test}
+        {:credo, "~> 0.8.10", only: [:dev, :test]},
+        {:inch_ex, "~> 0.5.6", only: [:dev, :test]},
+        {:coverex, "~> 1.4.15", only: :test}
     ]
   end
 end

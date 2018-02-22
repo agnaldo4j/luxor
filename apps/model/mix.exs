@@ -37,8 +37,8 @@ defmodule Model.Mixfile do
   defp deps do
     [
         {:combine, github: "bitwalker/combine", override: true},
-        {:timex, "~> 2.1"},
-        {:poison, "~> 2.0"}
+        {:timex, "~> 3.2.1"},
+        {:poison, "~> 3.1.0"}
     ]
   end
 end
