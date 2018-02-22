@@ -24,7 +24,6 @@ defmodule RestApi.Mixfile do
             :corsica,
             :cowboy,
             :plug,
-            :relx,
             :timex,
             :poison,
             :joken,
